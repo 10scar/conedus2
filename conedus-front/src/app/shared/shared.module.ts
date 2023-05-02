@@ -5,6 +5,7 @@ import { HeaderComponent } from './components/header/header.component';
 // Angular Material
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
   ],
   imports: [
     CommonModule,
+    RouterModule,
     MatInputModule,
     MatIconModule
   ],
