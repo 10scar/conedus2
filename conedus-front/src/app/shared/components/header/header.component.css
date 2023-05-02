@@ -6,11 +6,11 @@
   align-items: center;
   padding: 10px 50px;
   background-color: var(--light-blue);
+  gap: 30px;
 }
 
 .banner-logo {
   height: 100px;
-  margin-right: 30px;
 }
 
 .search-container {
@@ -29,4 +29,21 @@
 
 .white-text {
   color: var(--white);
+}
+
+.other-pages {
+  display: flex;
+  gap: 20px;
+}
+
+.other-pages a {
+  color: var(--white);
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.other-pages a:hover {
+  color: var(--dark-blue);
 }
