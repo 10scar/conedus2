@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Colegio, ColegioPorMunicipio, Coordenadas, Establecimiento } from 'src/app/shared/interfaces/Conedus.interfaces';
+import { Colegio, ColegioPorMunicipio, Coordenadas, Establecimiento, TOP10Colegios } from 'src/app/shared/interfaces/Conedus.interfaces';
 import { ApiService } from 'src/app/shared/services/api.service';
 
 @Component({
@@ -8,7 +8,72 @@ import { ApiService } from 'src/app/shared/services/api.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  mejoresColombia: Establecimiento[] = [];
+  mejoresColombia: TOP10Colegios[] = [
+    {
+      establecimiento_genero: 'MIXTO',
+      establecimiento_nombre: 'Colegio Bilingüe Diana Oese',
+      establecimiento_sector: 'NO OFICIAL',
+      municipio_nombre: 'CALI',
+      id: 1
+    },
+    {
+      establecimiento_genero: 'MIXTO',
+      establecimiento_nombre: 'Colegio Nuevo Cambridge',
+      establecimiento_sector: 'NO OFICIAL',
+      municipio_nombre: 'Floridablanca',
+      id: 2
+    },
+    {
+      establecimiento_genero: 'MIXTO',
+      establecimiento_nombre: 'Liceo Campo David',
+      establecimiento_sector: 'NO OFICIAL',
+      municipio_nombre: 'Bogotá',
+      id: 3,
+    },
+    {
+      establecimiento_genero: 'MIXTO',
+      establecimiento_nombre: 'Colegio la Quinta del Puente',
+      establecimiento_sector: 'NO OFICIAL',
+      municipio_nombre: 'Floridablanca',
+      id: 4,
+    },
+    {
+      establecimiento_genero: 'MIXTO',
+      establecimiento_nombre: 'I.E. Cambridge School',
+      establecimiento_sector: 'NO OFICIAL',
+      municipio_nombre: 'Pamplona',
+      id: 5,
+    },
+    {
+      establecimiento_genero: 'MIXTO',
+      establecimiento_nombre: 'Colegio Gimnasio Calibío',
+      establecimiento_sector: 'NO OFICIAL',
+      municipio_nombre: 'Popayán',
+      id: 6
+    },
+    {
+      establecimiento_genero: 'MIXTO',
+      establecimiento_nombre: 'Colegio Anglo Americano',
+      establecimiento_sector: 'NO OFICIAL',
+      municipio_nombre: 'Bogotá',
+      id: 7
+    },
+    {
+      establecimiento_genero: 'MIXTO',
+      establecimiento_nombre: 'Gimnasio Colombo Británico',
+      establecimiento_sector: 'NO OFICIAL',
+      municipio_nombre: 'Bogotá',
+      id: 8
+    },
+    {
+      establecimiento_genero: 'MIXTO',
+      establecimiento_nombre: 'Colegio Colombo Americano CAS',
+      establecimiento_sector: 'NO OFICIAL',
+      municipio_nombre: 'Bogotá',
+      id: 9
+    },
+  ];
+
   colegiosCiudad: ColegioPorMunicipio[] = [
     {
       municipio_nombre: 'BOGOTA',

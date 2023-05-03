@@ -3,23 +3,50 @@ main {
   margin: 0 auto;
 }
 
+.section-title {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--dark-blue);
+  text-align: center;
+}
+
 .ranking-section {
   display: flex;
   justify-content: space-between;
   margin: 0 auto 30px;
-  padding-top: 30px;
 }
 
 .ranking-container {
   text-align: center;
   padding: 20px;
   background-color: var(--light-orange);
-  min-width: 400px;
-
+  width: 440px;
 }
 
-.text-center {
-  text-align: center;
+.note {
+  margin-bottom: 30px;
+}
+
+.best-schools-list {
+  text-align: left;
+  font-size: 18px;
+}
+
+.best-school {
+  text-align: left;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.best-school:hover {
+  font-weight: 500;
+}
+
+.best-school a {
+  text-decoration: none;
+  color: var(--black);
 }
 
 .cities-ranking {

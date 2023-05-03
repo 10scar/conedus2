@@ -1,12 +1,15 @@
 <app-header></app-header>
 <main>
+  <p class="section-title">Rankings de interés</p>
   <section class="ranking-section">
     <div class="ranking-container">
       <h2>Mejores 10 colegios de Colombia</h2>
-      <span>Según el puntaje global del ránking ICFES</span>
-      <div *ngFor="let mejor of mejoresColombia; index as i">
-        {{ i+1 }}. {{ mejor.establecimiento_nombre }}
-      </div>
+      <span class="note">Según el puntaje global del ránking ICFES</span>
+      <ol class="best-schools-list">
+        <li class="best-school" *ngFor="let mejor of mejoresColombia; index as i">
+          <a routerLink="">{{ mejor.establecimiento_nombre }}, en {{ mejor.municipio_nombre | titlecase }}</a>
+        </li>
+      </ol>
     </div>
     <div class="ranking-container">
       <h2>Mejores 10 colegios de Colombia</h2>
@@ -16,7 +19,7 @@
       </ng-container>
     </div>
   </section>
-  <h2 class="text-center">Mejores colegios por ciudad</h2>
+  <p class="section-title">Mejores colegios por ciudad</p>
   <section class="cities-ranking">
     <div *ngFor="let colegio of colegiosCiudad" class="cities-school">
       <img class="cities-school__info-img" [src]="'../../../assets/images/cities/'+colegio.municipio_nombre+'.jpg'"
@@ -33,3 +36,4 @@
     </div>
   </section>
 </main>
+<app-footer></app-footer>
