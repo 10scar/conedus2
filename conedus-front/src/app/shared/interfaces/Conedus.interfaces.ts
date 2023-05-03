@@ -63,9 +63,19 @@ export interface Sede {
   sede_coordenadas: Coordenadas;
 }
 
+export interface TOP10Colegios {
+  municipio_nombre: string;
+  establecimiento_nombre: string;
+  establecimiento_sector: 'OFICIAL' | 'NO OFICIAL';
+  establecimiento_genero: 'MASCULINO' | 'FEMENINO' | 'MIXTO';
+  id: number
+}
+
 export interface ColegioPorMunicipio {
   municipio_nombre: string;
   establecimiento_nombre: string;
   establecimiento_sector: 'OFICIAL' | 'NO OFICIAL';
   establecimiento_genero: 'MASCULINO' | 'FEMENINO' | 'MIXTO';
 }
+
+
