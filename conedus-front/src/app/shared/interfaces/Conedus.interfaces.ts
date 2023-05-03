@@ -18,7 +18,7 @@ export interface Coordenadas {
   longitud: number
 }
 
-export interface establecimientos {
+export interface Establecimiento {
   establecimiento_id: number;
   municipio_id: number;
   establecimiento_nombre: string;
@@ -61,4 +61,11 @@ export interface Sede {
   sede_niveles: string;
   sede_grados: string;
   sede_coordenadas: Coordenadas;
+}
+
+export interface ColegioPorMunicipio {
+  municipio_nombre: string;
+  establecimiento_nombre: string;
+  establecimiento_sector: 'OFICIAL' | 'NO OFICIAL';
+  establecimiento_genero: 'MASCULINO' | 'FEMENINO' | 'MIXTO';
 }
