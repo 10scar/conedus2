@@ -23,6 +23,7 @@ main {
   padding: 20px;
   background-color: var(--light-orange);
   width: 440px;
+  border-radius: 10px;
 }
 
 .note {
