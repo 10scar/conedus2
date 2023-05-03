@@ -1,1 +1,35 @@
-<p>home works!</p>
+<app-header></app-header>
+<main>
+  <section class="ranking-section">
+    <div class="ranking-container">
+      <h2>Mejores 10 colegios de Colombia</h2>
+      <span>Según el puntaje global del ránking ICFES</span>
+      <div *ngFor="let mejor of mejoresColombia; index as i">
+        {{ i+1 }}. {{ mejor.establecimiento_nombre }}
+      </div>
+    </div>
+    <div class="ranking-container">
+      <h2>Mejores 10 colegios de Colombia</h2>
+      <span>Necesitamos acceso a tu ubicación para esta funcionalidad</span>
+      <ng-container *ngIf="!accesoUbicacion">
+        <button></button>
+      </ng-container>
+    </div>
+  </section>
+  <h2 class="text-center">Mejores colegios por ciudad</h2>
+  <section class="cities-ranking">
+    <div *ngFor="let colegio of colegiosCiudad" class="cities-school">
+      <img class="cities-school__info-img" [src]="'../../../assets/images/cities/'+colegio.municipio_nombre+'.jpg'"
+        [alt]="'Imagen de ' + colegio.municipio_nombre">
+      <div class="padding">
+        <h3 class="cities-school__name">{{ colegio.municipio_nombre | titlecase }}</h3>
+        <b><span class="cities-school__info-name">{{ colegio.establecimiento_nombre | titlecase }}</span></b>
+        <div class="cities-school__info">
+          <span class="cities-school__info-text">Sector: {{ colegio.establecimiento_sector }}</span>
+          <br>
+          <span class="cities-school__info-text">Género: {{ colegio.establecimiento_genero }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
