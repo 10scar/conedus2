@@ -84,6 +84,9 @@ public class Sede implements Comparable<Sede>{
     public void setCoordenadas(ArrayCircular<Double> coordenadas_new) {
         this.coordenadas = coordenadas_new;
     }
+    public void setIcfes(ArrayCircular<Icfes> icfes_new) {
+        this.icfes = icfes_new;
+    }
     
     //Getters
     
