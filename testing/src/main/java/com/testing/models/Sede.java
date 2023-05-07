@@ -3,7 +3,7 @@ package com.testing.models;
 import com.testing.estructuras.ArrayCircular;
 import com.testing.estructuras.LinkedList;
 import com.testing.models.Icfes;
-public class Sede {
+public class Sede implements Comparable<Sede>{
 
     private Establecimiento establecimiento_ref;
     private ArrayCircular<Icfes> icfes;
@@ -16,12 +16,12 @@ public class Sede {
     private String email;
     private String sector;
     private String estado;
-    private String niveles;
+    private String[] niveles;
     private String modelos;
-    private String grados;
-    private float[] coordenadas = new float[2];
+    private String[] grados;
+    private ArrayCircular<Double> coordenadas;
 
-    public Sede(Establecimiento establecimientoID, String municipioID, String codigoDane, String nombre, String zona, String direccion, String telefono, String email, String sector, String estado, String niveles, String modelos, String grados, float[] coordenadas) {
+    public Sede(Establecimiento establecimientoID, String municipioID, String codigoDane, String nombre, String zona, String direccion, String telefono, String email, String sector, String estado, String[] niveles, String modelos, String[] grados, ArrayCircular<Double> coordenadas) {
         this.icfes = new  ArrayCircular<>(1); 
         this.establecimiento_ref = establecimientoID;
         this.municipioID = municipioID;
@@ -42,8 +42,8 @@ public class Sede {
     //Setters
 
 
-    public void setEstablecimientoID(int establecimientoID) {
-        this.establecimiento_ref = establecimiento_ref;
+    public void setEstablecimientoID(Establecimiento establecimientoID) {
+        this.establecimiento_ref = establecimientoID;
     }
     public void setMunicipioID(String municipioID) {
         this.municipioID = municipioID;
@@ -72,17 +72,17 @@ public class Sede {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    public void setNiveles(String niveles) {
+    public void setNiveles(String[] niveles) {
         this.niveles = niveles;
     }
     public void setModelos(String modelos) {
         this.modelos = modelos;
     }
-    public void setGrados(String grados) {
+    public void setGrados(String[] grados) {
         this.grados = grados;
     }
-    public void setCoordenadas(float[] coordenadas) {
-        this.coordenadas = coordenadas;
+    public void setCoordenadas(ArrayCircular<Double> coordenadas_new) {
+        this.coordenadas = coordenadas_new;
     }
     
     //Getters
@@ -90,6 +90,10 @@ public class Sede {
     public Establecimiento getEstablecimientoID() {
         return establecimiento_ref;
     }
+    public ArrayCircular<Icfes> getIcfes() {
+        return icfes;
+    }
+
     public String getMunicipioID() {
         return municipioID;
     }
@@ -117,28 +121,43 @@ public class Sede {
     public String getEstado() {
         return estado;
     }
-    public String getNiveles() {
+    public String[] getNiveles() {
         return niveles;
     }
     public String getModelos() {
         return modelos;
     }
-    public String getGrados() {
+    public String[] getGrados() {
         return grados;
     }
-    public float[] getCoordenadas() {
+    public ArrayCircular<Double> getCoordenadas() {
         return coordenadas;
     }
 
     //metodos compare to 
 
-    public int compareTo(Icfes otro) {
+    public int compareTo(Sede otro) {
+        ArrayCircular<Icfes> icfes_otro = otro.getIcfes();
+        if(icfes.getSize()<1){
+            return 1;
+        }else if(icfes_otro.getSize()<1){
+            return -1;
+        }
         int promedio=0;
         int otro_promedio =0;
+        
         for(int i =0;i<icfes.getSize();i++){
-            promedio += icfes.get(i);
+            promedio += icfes.get(i).getGlobal();
         }
-        return Integer.compare(this.año, otro.año);
+
+        for(int i =0;i<icfes.getSize();i++){
+            promedio += icfes_otro.get(i).getGlobal();
+        }
+
+        return Integer.compare(promedio/icfes.getSize(), otro_promedio/icfes_otro.getSize());
     }
+
+
+   
     
 }
