@@ -33,6 +33,7 @@ public class App {
         
         String tipoEstructura;
         String ordenar;
+        int numeroDatos;
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Prueba de operaciones CRUD en estructuras con datos primitivos");
@@ -42,6 +43,10 @@ public class App {
 
         System.out.println("¿Deseea ordenar los datos a medida que se insertan? (y/n)");
         ordenar = sc.nextLine();
+        System.out.println();
+        
+        System.out.println("¿Cuantos datos desea agregar?"); 
+        numeroDatos = Integer.parseInt(sc.nextLine());
         System.out.println();
 
         switch(tipoEstructura){
