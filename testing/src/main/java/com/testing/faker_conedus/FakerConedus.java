@@ -58,8 +58,8 @@ public class FakerConedus {
         int matricula_contratada = random.nextInt(2);
         boolean internado = faker.bool().bool();
         ArrayCircular<Double> coordenadas = new ArrayCircular<>(2);
-        coordenadas.pushBack(Double.parseDouble(faker.address().latitude()));
-        coordenadas.pushBack(Double.parseDouble(faker.address().longitude()));
+        coordenadas.pushBack(Double.parseDouble(faker.address().latitude().replace(",", ".")));
+        coordenadas.pushBack(Double.parseDouble(faker.address().longitude().replace(",", ".")));
 
         //"Object establecimiento = new Object();
         //la idea es retornar un objeto de tipo establecimiento. 
