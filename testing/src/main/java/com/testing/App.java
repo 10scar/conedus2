@@ -20,22 +20,33 @@ import java.io.PrintWriter;
 public class App {
     public static void main( String[] args ) throws FileNotFoundException
     {
-        // estructura_1_establecimiento  estructura_2_sedes
         Random rand = new Random();//FakerConedus faker_generador =new FakerConedus();
-        ArrayList<Integer> arrayCircularSedes = new ArrayList<Integer>(10);// ArrayCircular arrayCircularSedes = new ArrayCircular(10);
-        LinkedList<Integer> linkedListSedes = new LinkedList<Integer>();// LinkedList linkedListSedes = new LinkedList();
+        ArrayCircular<Integer> arrayCircularSedes = new ArrayCircular<Integer>(10);
+        LinkedList<Integer> linkedListSedes = new LinkedList<Integer>();
+        // Doubly linked list
 
-        // lo unico es que al correr de nuevo la aplicacion, los archivos de la anterior vez se borran en lugar de escribir los nuevos
-        // Aqui al comienzo escribir los nombres de las columnas de cada archivo (casos, tiempo array, tiempo lista enlazada)
+        long timeCreate;
+        long timeOrder;
+        long timeRead;
+        long timeUpdate;
+        long timeDelete;
+        
+        String tipoEstructura;
+        String ordenar;
 
-        ArrayList<Integer> numeroDatos = new ArrayList<Integer>();
         Scanner sc = new Scanner(System.in);
-        System.out.println("Ingrese la cantidad de datos que se usaran en cada prueba, separados por comas:");
-        String[] casos = sc.nextLine().split(",");
+        System.out.println("Prueba de operaciones CRUD en estructuras con datos primitivos");
+        System.out.println("Elija tipo de estructura:\n(1) Array Circular\n(2) Lista enlazada sencilla\n(3) Lista enlazada doble");
+        tipoEstructura = sc.nextLine();
         System.out.println();
 
-        for (String s : casos){
-            numeroDatos.add(Integer.parseInt(s));
+        System.out.println("¿Deseea ordenar los datos a medida que se insertan? (y/n)");
+        ordenar = sc.nextLine();
+        System.out.println();
+
+        switch(tipoEstructura){
+            case "1":
+            break;
         }
 
             // Prueba 1: agregar datos: create.csv
