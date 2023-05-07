@@ -146,8 +146,8 @@ public class Sede implements Comparable<Sede>{
         }else if(icfes_otro.getSize()<1){
             return -1;
         }
-        int promedio=0;
-        int otro_promedio =0;
+        float promedio=0;
+        float otro_promedio =0;
         
         for(int i =0;i<icfes.getSize();i++){
             promedio += icfes.get(i).getGlobal();
@@ -157,7 +157,7 @@ public class Sede implements Comparable<Sede>{
             promedio += icfes_otro.get(i).getGlobal();
         }
 
-        return Integer.compare(promedio/icfes.getSize(), otro_promedio/icfes_otro.getSize());
+        return Float.compare(promedio/icfes.getSize(), otro_promedio/icfes_otro.getSize());
     }
 
 
