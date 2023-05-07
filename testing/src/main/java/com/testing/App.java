@@ -49,9 +49,58 @@ public class App {
         System.out.println("¿Cuantos datos desea agregar?"); 
         numeroDatos = Integer.parseInt(sc.nextLine());
         System.out.println();
-
+        
         switch(tipoEstructura){
-            case "1":
+            case "1":// Array Circular
+                // Create 
+                if (ordenar.equals("y")){
+                    start = System.nanoTime();
+                    for (int i = 0; i<numeroDatos; i++){
+                        int num = rand.nextInt(numeroDatos);
+                        arrayCircularSedes.insertInOrder(num);
+                    }
+                    timeCreate = (System.nanoTime()-start);
+                    timeOrder = 0;
+                }else{
+                    start = System.nanoTime();
+                    for (int i = 0; i<numeroDatos; i++){
+                        int num = rand.nextInt(numeroDatos);
+                        arrayCircularSedes.pushBack(num);
+                    }
+                    timeCreate = (System.nanoTime()-start);
+
+                    // Order elements
+                    start = System.nanoTime();
+                    //arrayCircularSedes.quickOrder()
+                    timeOrder = (System.nanoTime()-start);
+                }
+            break;
+
+            case "2":
+            if (ordenar.equals("y")){
+                start = System.nanoTime();
+                for (int i = 0; i<numeroDatos; i++){
+                    int num = rand.nextInt(numeroDatos);
+                    linkedListSedes.insertInOrder(num);
+                }
+                timeCreate = (System.nanoTime()-start);
+                timeOrder = 0;
+            }else{
+                start = System.nanoTime();
+                for (int i = 0; i<numeroDatos; i++){
+                    int num = rand.nextInt(numeroDatos);
+                    linkedListSedes.pushBack(num);
+                }
+                timeCreate = (System.nanoTime()-start);
+
+                // Order elements
+                start = System.nanoTime();
+                //arrayCircularSedes.quickOrder()
+                timeOrder = (System.nanoTime()-start);
+            }
+            break;
+
+            case "3":
             break;
         }
 
