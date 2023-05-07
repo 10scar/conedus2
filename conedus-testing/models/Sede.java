@@ -3,6 +3,7 @@ public class Sede {
     private int sedeID;
 
     private int establecimientoID;
+    // private array Circular/lista enlazada de registros icfes
 
     private String municipioID;
     private String codigoDane;
