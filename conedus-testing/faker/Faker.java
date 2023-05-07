@@ -1,15 +1,15 @@
 import java.util.Random;
-
 import com.github.javafaker.Faker;
 
-public class FakerGenerator {
+public class FakerConedus {
 
-    public void FakerGenerator(){
+    public FakerConedus(){
         Faker fake = new Faker();
-        Random random = new Random(); 
+        Random random = new Random();
     }
 
-    public static void generador_establecimiento(){
+    public static void establecimiento(){
+        
         String[] prestadorPlantaOptions = {"OFICIAL", "PERSONA NATURAL", "FUNDACION O CORPORACIONES", "COMUNIDAD RELIGIOSA",
                 "SOCIEDAD", "EDUCACION MISIONAL CONTRATADA", "FEDERACIONES", "COOPERATIVO", "CAJA DE COMPENSACIÓN",
                 "CONCESION", "REGIMEN ESPECIAL", "COMUNIDAD", "UNIVERSIDAD"};  
@@ -47,7 +47,7 @@ public class FakerGenerator {
     }
 
 
-    public static void generator_sedes(int establecimiento) {
+    public static void sedes(int establecimiento, Faker faker, Random random) {
         // Generar datos aleatorios para cada campo
         String[] municipios = { "Bogota", "Medellin", "Cartagena" };
         String municipio_id = municipios[random.nextInt(municipios.length)];
@@ -74,7 +74,30 @@ public class FakerGenerator {
         System.out.println("Generación exitosa");
     }
 
+
+
+    public static void icfes(String sede) {
+        int icfes_año = 2019;
+        Random random = new Random();
+        List<IcfesResult> icfesResults = new ArrayList<>();
+
+        for (int i = 0; i < 3; i++) {
+            int icfes_global = random.nextInt(500) + 1;
+            int icfes_matematicas = random.nextInt(100) + 1;
+            int icfes_lectura = random.nextInt(100) + 1;
+            int icfes_sociales = random.nextInt(100) + 1;
+            int icfes_ciencias = random.nextInt(100) + 1;
+            int icfes_ingles = random.nextInt(100) + 1;
+            icfes_año++;
+
+            Icfes icfesResult = new Icfes(icfes_año, sede, icfes_global, icfes_matematicas,
+                    icfes_lectura, icfes_sociales, icfes_ciencias, icfes_ingles);
+            icfesResults.add(icfesResult);
+        }
+
     public static void main(String[] args) {
+        
+
         
     }
 }
