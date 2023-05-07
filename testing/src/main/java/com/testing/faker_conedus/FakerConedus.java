@@ -1,14 +1,31 @@
+package com.testing.faker_conedus;
+import java.lang.reflect.Array;
+import java.util.Locale;
 import java.util.Random;
 import com.github.javafaker.Faker;
-import models.
+import com.testing.models.Establecimiento;
+import com.testing.models.Sede;
+import com.testing.models.Icfes;
+
+import com.testing.estructuras.LinkedList;
+import com.testing.estructuras.ArrayCircular;;
+
 public class FakerConedus {
+    private static Faker faker;
+    private static Random random;
+
+
 
     public FakerConedus(){
-        Faker fake = new Faker();
-        Random random = new Random();
+        faker = new Faker(new Locale("es-MX"));
+        random = new Random();
     }
 
-    public static void establecimiento(){
+    public String getRandomElement(String[] opciones){
+        return opciones[new Random().nextInt(opciones.length)];
+    }
+
+    public String establecimiento(){
         
         String[] prestadorPlantaOptions = {"OFICIAL", "PERSONA NATURAL", "FUNDACION O CORPORACIONES", "COMUNIDAD RELIGIOSA",
                 "SOCIEDAD", "EDUCACION MISIONAL CONTRATADA", "FEDERACIONES", "COOPERATIVO", "CAJA DE COMPENSACIÓN",
@@ -37,16 +54,19 @@ public class FakerConedus {
         String estado = getRandomElement(new String[]{"NUEVO-ACTIVO", "ANTIGUO-ACTIVO", "CIERRE DEFINITIVO", "CIERRE TEMPORAL"});
         String prestador_servicio = getRandomElement(new String[]{"OFICIAL", "PERSONA NATURAL", "FUNDACION O CORPORACIONES", "COMUNIDAD RELIGIOSA", "SOCIEDAD", "EDUCACION MISIONAL CONTRATADA", "FEDERACIONES", "COOPERATIVO", "CAJA DE COMPENSACIÓN", "CONCESION", "REGIMEN ESPECIAL", "COMUNIDAD", "UNIVERSIDAD"});
         String prestador_planta = prestadorPlantaOptions[random.nextInt(prestadorPlantaOptions.length)];
-        String resguardo = fake.address().fullAddress();
+        String resguardo = faker.address().fullAddress();
         int matricula_contratada = random.nextInt(2);
-        boolean internado = fake.bool().bool();
-        String coordenadas = "ST_PointFromText('POINT(" + fake.longitude() + " " + fake.latitude() + ")')";
+        boolean internado = faker.bool().bool();
+        ArrayCircular<Double> coordenadas = new ArrayCircular<>(2);
+        coordenadas.pushBack(Double.parseDouble(faker.address().latitude()));
+        coordenadas.pushBack(Double.parseDouble(faker.address().longitude()));
 
         //"Object establecimiento = new Object();
         //la idea es retornar un objeto de tipo establecimiento. 
+        return "todo ok";
     }
 
-
+    
     public static void sedes(int establecimiento, Faker faker, Random random) {
         // Generar datos aleatorios para cada campo
         String[] municipios = { "Bogota", "Medellin", "Cartagena" };
@@ -79,7 +99,7 @@ public class FakerConedus {
     public static void icfes(String sede) {
         int icfes_año = 2019;
         Random random = new Random();
-        List<IcfesResult> icfesResults = new ArrayList<>();
+        LinkedList<Icfes> icfesResults = new LinkedList<>();
 
         for (int i = 0; i < 3; i++) {
             int icfes_global = random.nextInt(500) + 1;
@@ -90,14 +110,10 @@ public class FakerConedus {
             int icfes_ingles = random.nextInt(100) + 1;
             icfes_año++;
 
-            Icfes icfesResult = new Icfes(icfes_año, sede, icfes_global, icfes_matematicas,
+            /* Icfes icfesResult = new Icfes(icfes_año, sede, icfes_global, icfes_matematicas,
                     icfes_lectura, icfes_sociales, icfes_ciencias, icfes_ingles);
-            icfesResults.add(icfesResult);
+            icfesResults.add(icfesResult); */
         }
+}
 
-    public static void main(String[] args) {
-        
-
-        
-    }
 }

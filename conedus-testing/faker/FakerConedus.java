@@ -1,6 +1,6 @@
 import java.util.Random;
 import com.github.javafaker.Faker;
-import models.
+
 public class FakerConedus {
 
     public FakerConedus(){
