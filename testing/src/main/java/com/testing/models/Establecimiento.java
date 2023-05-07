@@ -1,8 +1,9 @@
 package com.testing.models;
-
+import com.testing.models.Sede;
+import com.testing.estructuras.*;
 public class Establecimiento {
 
-    private int establecimientoID;
+    private LinkedList<Sede> listas_sedes;
     private String municipioID;
     private String nombre;
     private String codigoDane;
@@ -28,11 +29,12 @@ public class Establecimiento {
     private String resguardo;
     private int matriculaContratada;
     private String internado;
-    private float[] coordenadas = new float[2];
+    private ArrayCircular<Double> coordenadas;
     // private ArrayCircular/lista enlazada de tipo Sede. Agregar constructor con este argumento
 
-    public Establecimiento(int id, String municipioID, String nombre, String codigoDane, String direccion, String telefono, String correo, String rector, String tipo, String jornadas, String etnias, String sector, String genero, String caracter, String licencia, String modelos, String capacidadesExcepcionales, String discapacidades, String idiomas, String estado, String prestadorServicio, String calendario, String prestadorPlanta, String resguardo, int matriculaContratada, String internado, float[] coordenadas){
-    this.establecimientoID = id;
+    public Establecimiento(String municipioID, String nombre, String codigoDane, String direccion, String telefono, String correo, String rector, String tipo, String jornadas, String etnias, String sector, String genero, String caracter, String licencia, String modelos, String capacidadesExcepcionales, String discapacidades, String idiomas, String estado, String prestadorServicio, String calendario, String prestadorPlanta, String resguardo, int matriculaContratada, String internado, ArrayCircular<Double> coordenadas){
+    
+    this.listas_sedes = new LinkedList<>();
     this.municipioID = municipioID;
     this.nombre = nombre;
     this.codigoDane = codigoDane;
@@ -65,9 +67,6 @@ public class Establecimiento {
 
     //Setters
     
-    public void setEstablecimientoID(int establecimientoID) {
-        this.establecimientoID = establecimientoID;
-    }
     public void setMunicipioID(String municipioID) {
         this.municipioID = municipioID;
     }
@@ -143,7 +142,7 @@ public class Establecimiento {
     public void setInternado(String internado) {
         this.internado = internado;
     }
-    public void setCoordenadas(float[] coordenadas) {
+    public void setCoordenadas(ArrayCircular<Double> coordenadas) {
         this.coordenadas = coordenadas;
     }
     public String getNombre() {
@@ -151,9 +150,9 @@ public class Establecimiento {
     }
 
     //Getters
-
-    public int getEstablecimientoID() {
-        return establecimientoID;
+  
+    public LinkedList<Sede> getSedes() {
+        return listas_sedes;
     }
     public String getMunicipioID() {
         return municipioID;
@@ -227,7 +226,7 @@ public class Establecimiento {
     public String getInternado() {
         return internado;
     }
-    public float[] getCoordenadas() {
+    public ArrayCircular<Double> getCoordenadas() {
         return coordenadas;
     }
 
