@@ -25,6 +25,7 @@ public class App {
         LinkedList<Integer> linkedListSedes = new LinkedList<Integer>();
         // Doubly linked list
 
+        long start;
         long timeCreate;
         long timeOrder;
         long timeRead;
