@@ -1,11 +1,12 @@
 package com.testing.models;
+
+import com.testing.estructuras.ArrayCircular;
+import com.testing.estructuras.LinkedList;
+import com.testing.models.Icfes;
 public class Sede {
-    
-    private int sedeID;
 
-    private int establecimientoID;
-    // private array Circular/lista enlazada de registros icfes
-
+    private Establecimiento establecimiento_ref;
+    private ArrayCircular<Icfes> icfes;
     private String municipioID;
     private String codigoDane;
     private String nombre;
@@ -20,9 +21,9 @@ public class Sede {
     private String grados;
     private float[] coordenadas = new float[2];
 
-    public Sede(int sedeID, int establecimientoID, String municipioID, String codigoDane, String nombre, String zona, String direccion, String telefono, String email, String sector, String estado, String niveles, String modelos, String grados, float[] coordenadas) {
-        this.sedeID = sedeID;
-        this.establecimientoID = establecimientoID;
+    public Sede(Establecimiento establecimientoID, String municipioID, String codigoDane, String nombre, String zona, String direccion, String telefono, String email, String sector, String estado, String niveles, String modelos, String grados, float[] coordenadas) {
+        this.icfes = new  ArrayCircular<>(1); 
+        this.establecimiento_ref = establecimientoID;
         this.municipioID = municipioID;
         this.codigoDane = codigoDane;
         this.nombre = nombre;
@@ -40,11 +41,9 @@ public class Sede {
   
     //Setters
 
-    public void setSedeID(int sedeID) {
-        this.sedeID = sedeID;
-    }
+
     public void setEstablecimientoID(int establecimientoID) {
-        this.establecimientoID = establecimientoID;
+        this.establecimiento_ref = establecimiento_ref;
     }
     public void setMunicipioID(String municipioID) {
         this.municipioID = municipioID;
@@ -88,11 +87,8 @@ public class Sede {
     
     //Getters
     
-    public int getSedeID() {
-        return sedeID;
-    }
-    public int getEstablecimientoID() {
-        return establecimientoID;
+    public Establecimiento getEstablecimientoID() {
+        return establecimiento_ref;
     }
     public String getMunicipioID() {
         return municipioID;
@@ -132,6 +128,17 @@ public class Sede {
     }
     public float[] getCoordenadas() {
         return coordenadas;
+    }
+
+    //metodos compare to 
+
+    public int compareTo(Icfes otro) {
+        int promedio=0;
+        int otro_promedio =0;
+        for(int i =0;i<icfes.getSize();i++){
+            promedio += icfes.get(i);
+        }
+        return Integer.compare(this.año, otro.año);
     }
     
 }

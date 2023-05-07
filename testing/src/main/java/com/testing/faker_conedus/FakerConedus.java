@@ -62,6 +62,7 @@ public class FakerConedus {
         coordenadas.pushBack(Double.parseDouble(faker.address().longitude().replace(",", ".")));
 
         //"Object establecimiento = new Object();
+        Establecimiento establecimiento = new Establecimiento(matricula_contratada, municipio_id, establecimiento_nombre, establecimiento_capacidades_excepcionales, establecimiento_direccion, establecimiento_telefono, establecimiento_discapacidades, establecimiento_rector, establecimiento_tipo, establecimiento_jornadas, establecimiento_etnias, establecimiento_sector, establecimiento_genero, establecimiento_caracter, establecimiento_licencia, establecimiento_modelos, discapacidades, discapacidades, idiomas, prestador_servicio, estado, establecimiento_calendario, prestador_planta, resguardo, matricula_contratada, resguardo, null)
         //la idea es retornar un objeto de tipo establecimiento. 
         return "todo ok";
     }
@@ -99,7 +100,7 @@ public class FakerConedus {
     public static void icfes(String sede) {
         int icfes_año = 2019;
         Random random = new Random();
-        LinkedList<Icfes> icfesResults = new LinkedList<>();
+        ArrayCircular<Icfes> icfesResults = new ArrayCircular(2);
 
         for (int i = 0; i < 3; i++) {
             int icfes_global = random.nextInt(500) + 1;

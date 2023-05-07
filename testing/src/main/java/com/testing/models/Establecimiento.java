@@ -1,8 +1,10 @@
 package com.testing.models;
-
+import com.testing.models.Sede;
+import com.testing.estructuras.*;
 public class Establecimiento {
 
-    private int establecimientoID;
+    private LinkedList<Sede> listas_
+    sedes;
     private String municipioID;
     private String nombre;
     private String codigoDane;
@@ -28,11 +30,10 @@ public class Establecimiento {
     private String resguardo;
     private int matriculaContratada;
     private String internado;
-    private float[] coordenadas = new float[2];
+    private double[] coordenadas = new double[2];
     // private ArrayCircular/lista enlazada de tipo Sede. Agregar constructor con este argumento
 
-    public Establecimiento(int id, String municipioID, String nombre, String codigoDane, String direccion, String telefono, String correo, String rector, String tipo, String jornadas, String etnias, String sector, String genero, String caracter, String licencia, String modelos, String capacidadesExcepcionales, String discapacidades, String idiomas, String estado, String prestadorServicio, String calendario, String prestadorPlanta, String resguardo, int matriculaContratada, String internado, float[] coordenadas){
-    this.establecimientoID = id;
+    public Establecimiento(String municipioID, String nombre, String codigoDane, String direccion, String telefono, String correo, String rector, String tipo, String jornadas, String etnias, String sector, String genero, String caracter, String licencia, String modelos, String capacidadesExcepcionales, String discapacidades, String idiomas, String estado, String prestadorServicio, String calendario, String prestadorPlanta, String resguardo, int matriculaContratada, String internado, double[] coordenadas){
     this.municipioID = municipioID;
     this.nombre = nombre;
     this.codigoDane = codigoDane;
