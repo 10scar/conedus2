@@ -1,5 +1,4 @@
 public class Icfes{
-  private int icfesId;
   private String año;
   private int global;
   private int matematicas;
@@ -17,13 +16,7 @@ public class Icfes{
         this.sociales = sociales;
         this.ciencias = ciencias;
         this.ingles = ingles;
-    }
-    public int getIcfesId() {
-        return icfesId;
-    }
-    public void setIcfesId(int icfesId) {
-        this.icfesId = icfesId;
-    }
+  
     public String getAño() {
         return año;
     }
