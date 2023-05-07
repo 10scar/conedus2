@@ -24,14 +24,6 @@ public class App {
         Random rand = new Random();//FakerConedus faker_generador =new FakerConedus();
         ArrayList<Integer> arrayCircularSedes = new ArrayList<Integer>(10);// ArrayCircular arrayCircularSedes = new ArrayCircular(10);
         LinkedList<Integer> linkedListSedes = new LinkedList<Integer>();// LinkedList linkedListSedes = new LinkedList();
-        File create = new File("create.csv");
-        File read = new File("read.csv");
-        File update = new File("update.csv");
-        File delete = new File("delete.csv");
-        PrintWriter createWriter = new PrintWriter(create);
-        PrintWriter readWriter = new PrintWriter(read);
-        PrintWriter updateWriter = new PrintWriter(update);
-        PrintWriter deleteWriter = new PrintWriter(delete);
 
         // lo unico es que al correr de nuevo la aplicacion, los archivos de la anterior vez se borran en lugar de escribir los nuevos
         // Aqui al comienzo escribir los nombres de las columnas de cada archivo (casos, tiempo array, tiempo lista enlazada)
@@ -46,8 +38,6 @@ public class App {
             numeroDatos.add(Integer.parseInt(s));
         }
 
-
-        for (int c : numeroDatos){
             // Prueba 1: agregar datos: create.csv
             long create1;
             long read1;
@@ -79,9 +69,9 @@ public class App {
             }
             create2 = (System.nanoTime()-start)/1000;// para tener el tiempo en milisegundos
 
-            createWriter.printf("%d,%d,%d,\n",c,create1,create2);// y asi con las demas medicionees
-
-
+            System.out.printf("%d,%d,%d,\n",c,create1,create2);// y asi con las demas medicionees
+        
+        
 
             // Prueba 2: leer top 10 sedes por promedio de icfes: read.csv
             // Prueba 3: Actualizar informacion de una sede: update.csv
@@ -91,14 +81,6 @@ public class App {
             // Clear arrays for the next tests
             arrayCircularSedes = new ArrayList<Integer>(10);// arrayCircularSedes = new ArrayCircular(10);
             linkedListSedes = new LinkedList<Integer>();// linkedListSedes = new LinkedList();
-
-        }
-
-
-        createWriter.close();
-        readWriter.close();
-        updateWriter.close();
-        deleteWriter.close();
 
 
 
