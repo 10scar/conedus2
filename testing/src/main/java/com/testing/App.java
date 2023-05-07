@@ -2,26 +2,117 @@ package com.testing;
 import com.testing.faker_conedus.FakerConedus;
 import com.testing.estructuras.*;
 import com.testing.models.*;
+
+
+import java.util.Scanner;
+import java.util.ArrayList;//Reemplaza por Array circular
+import java.util.LinkedList;//Reemplaza nuestra estructura
+import java.util.Random;//Reemplaza faker
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
+
 /**
  * Hello world!
  *
  */
-public class App 
-{
-    public static void main( String[] args )
+public class App {
+    public static void main( String[] args ) throws FileNotFoundException
     {
-        //estructura_1_establecimiento  estructura_2_sedes
-        FakerConedus faker_generador =new  FakerConedus();
-        Establecimiento establecimiento = faker_generador.establecimiento();
-        Sede sede = faker_generador.sedes(establecimiento);
-        //estructura_1_establecimiento.pushback(establecimiento);
-        //estructura_2_sedes.pushback(sedes);
+        // estructura_1_establecimiento  estructura_2_sedes
+        Random rand = new Random();//FakerConedus faker_generador =new FakerConedus();
+        ArrayList<Integer> arrayCircularSedes = new ArrayList<Integer>(10);// ArrayCircular arrayCircularSedes = new ArrayCircular(10);
+        LinkedList<Integer> linkedListSedes = new LinkedList<Integer>();// LinkedList linkedListSedes = new LinkedList();
+        File create = new File("create.csv");
+        File read = new File("read.csv");
+        File update = new File("update.csv");
+        File delete = new File("delete.csv");
+        PrintWriter createWriter = new PrintWriter(create);
+        PrintWriter readWriter = new PrintWriter(read);
+        PrintWriter updateWriter = new PrintWriter(update);
+        PrintWriter deleteWriter = new PrintWriter(delete);
 
-        //crea 3 icfes y los añade al atributo icfes
-        Icfes icfes = faker_generador.sedes(establecimiento);
-        sede.setIcfes(icfes);
+        // lo unico es que al correr de nuevo la aplicacion, los archivos de la anterior vez se borran en lugar de escribir los nuevos
+        // Aqui al comienzo escribir los nombres de las columnas de cada archivo (casos, tiempo array, tiempo lista enlazada)
 
-        System.out.println( "Hello World!" );
+        ArrayList<Integer> numeroDatos = new ArrayList<Integer>();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Ingrese la cantidad de datos que se usaran en cada prueba, separados por comas:");
+        String[] casos = sc.nextLine().split(",");
+        System.out.println();
+
+        for (String s : casos){
+            numeroDatos.add(Integer.parseInt(s));
+        }
+
+
+        for (int c : numeroDatos){
+            // Prueba 1: agregar datos: create.csv
+            long create1;
+            long read1;
+            long update1;
+            long delete1;
+
+            long create2;
+            long read2;
+            long update2;
+            long delete2;
+            
+            
+            long start = System.nanoTime();
+            for (int i=0; i<c; i++){
+                //metodo agregar en estructura1
+                int num = rand.nextInt(c*10);
+                arrayCircularSedes.add(num);
+                linkedListSedes.add(num);
+                
+            }
+            create1 = (System.nanoTime()-start)/1000;// para tener el tiempo en milisegundos
+
+
+            start = System.nanoTime();
+            for (int i=0; i<c; i++){
+                //metodo agregar en estructura2
+                int num = rand.nextInt(c*10);
+                linkedListSedes.add(num);
+            }
+            create2 = (System.nanoTime()-start)/1000;// para tener el tiempo en milisegundos
+
+            createWriter.printf("%d,%d,%d,\n",c,create1,create2);// y asi con las demas medicionees
+
+
+
+            // Prueba 2: leer top 10 sedes por promedio de icfes: read.csv
+            // Prueba 3: Actualizar informacion de una sede: update.csv
+            // Prueba 4: Borrar el estudiante con el segundo promedio de icfes mas alto : delete.csv
+
+
+            // Clear arrays for the next tests
+            arrayCircularSedes = new ArrayList<Integer>(10);// arrayCircularSedes = new ArrayCircular(10);
+            linkedListSedes = new LinkedList<Integer>();// linkedListSedes = new LinkedList();
+
+        }
+
+
+        createWriter.close();
+        readWriter.close();
+        updateWriter.close();
+        deleteWriter.close();
+
+
+
+
+        // Establecimiento establecimiento = faker_generador.establecimiento();
+        // Sede sede = faker_generador.sedes(establecimiento);
+        // //estructura_1_establecimiento.pushback(establecimiento);
+        // //estructura_2_sedes.pushback(sedes);
+
+        // //crea 3 icfes y los añade al atributo icfes
+        // Icfes icfes = faker_generador.sedes(establecimiento);
+        // sede.setIcfes(icfes);
+
+        // System.out.println( "Hello World!" );
         
 
          /*TO DO
@@ -37,3 +128,6 @@ public class App
     */
     }
 }
+
+
+
