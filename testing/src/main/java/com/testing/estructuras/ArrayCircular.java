@@ -30,6 +30,39 @@ import java.util.NoSuchElementException;
         return data[actualIndex];
     }
     
+    public void set(int index, E element) {
+        if (index < 0 || index >= size) { // se verifica que el índice sea válido
+            throw new IndexOutOfBoundsException();
+        }
+        int actualIndex = (head + index) % capacity; // se obtiene el índice real del elemento en el arreglo
+        data[actualIndex] = element;
+    }
+        
+    public void delete(int index){
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+            
+        int currentIndex = index;
+        if (index <= size-index){// si el indice del elemento esta mas cerca del inicio, correr los elementos anteriores
+            while(currentIndex>0){
+                int currentActualIndex = ((head + currentIndex) % capacity);
+                int currentPrevActualIndex = ((head + currentIndex - 1) % capacity);
+                data[currentActualIndex] = data[currentPrevActualIndex];
+                currentIndex--;
+            }
+            popFront();
+        } else{
+            while(currentIndex < getSize()-1){
+                int currentActualIndex = ((head + currentIndex) % capacity);
+                int currentNextActualIndex = ((head + currentIndex - 1) % capacity);
+                data[currentActualIndex] = data[currentNextActualIndex];
+                currentIndex++;
+            }
+            popBack();
+        }
+    }
+        
     // Devuelve el tamaño actual del arreglo
     public int getSize() {
         return size;
@@ -206,4 +239,3 @@ public void insertInOrder(E elemento) {
         }
     }
 }
-

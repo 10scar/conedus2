@@ -5,8 +5,6 @@ import com.testing.models.*;
 
 
 import java.util.Scanner;
-import java.util.ArrayList;//Reemplaza por Array circular
-import java.util.LinkedList;//Reemplaza nuestra estructura
 import java.util.Random;//Reemplaza faker
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,114 +18,150 @@ import java.io.PrintWriter;
 public class App {
     public static void main( String[] args ) throws FileNotFoundException
     {
-        // estructura_1_establecimiento  estructura_2_sedes
         Random rand = new Random();//FakerConedus faker_generador =new FakerConedus();
-        ArrayList<Integer> arrayCircularSedes = new ArrayList<Integer>(10);// ArrayCircular arrayCircularSedes = new ArrayCircular(10);
-        LinkedList<Integer> linkedListSedes = new LinkedList<Integer>();// LinkedList linkedListSedes = new LinkedList();
-        File create = new File("create.csv");
-        File read = new File("read.csv");
-        File update = new File("update.csv");
-        File delete = new File("delete.csv");
-        PrintWriter createWriter = new PrintWriter(create);
-        PrintWriter readWriter = new PrintWriter(read);
-        PrintWriter updateWriter = new PrintWriter(update);
-        PrintWriter deleteWriter = new PrintWriter(delete);
+        ArrayCircular<Integer> arrayCircularSedes = new ArrayCircular<Integer>(10);
+        LinkedList<Integer> linkedListSedes = new LinkedList<Integer>();
+        // Doubly linked list
 
-        // lo unico es que al correr de nuevo la aplicacion, los archivos de la anterior vez se borran en lugar de escribir los nuevos
-        // Aqui al comienzo escribir los nombres de las columnas de cada archivo (casos, tiempo array, tiempo lista enlazada)
+        long start = 0L;
+        long timeCreate = 0L;
+        long timeOrder = 0L;
+        long timeRead = 0L;
+        long timeUpdate = 0L;
+        long timeDelete = 0L;
+        long timeDeleteAll = 0L;
+        
+        String tipoEstructura;
+        String ordenar;
+        int numeroDatos;
 
-        ArrayList<Integer> numeroDatos = new ArrayList<Integer>();
         Scanner sc = new Scanner(System.in);
-        System.out.println("Ingrese la cantidad de datos que se usaran en cada prueba, separados por comas:");
-        String[] casos = sc.nextLine().split(",");
+        System.out.println("Prueba de operaciones CRUD en estructuras con datos primitivos");
+        System.out.println("Elija tipo de estructura:\n(1) Array Circular\n(2) Lista enlazada sencilla\n(3) Lista enlazada doble");
+        tipoEstructura = sc.nextLine();
         System.out.println();
 
-        for (String s : casos){
-            numeroDatos.add(Integer.parseInt(s));
-        }
+        System.out.println("¿Deseea ordenar los datos a medida que se insertan? (y/n)");
+        ordenar = sc.nextLine();
+        System.out.println();
+
+        System.out.println("¿Cuantos datos desea agregar?"); 
+        numeroDatos = Integer.parseInt(sc.nextLine());
+        System.out.println();
 
 
-        for (int c : numeroDatos){
-            // Prueba 1: agregar datos: create.csv
-            long create1;
-            long read1;
-            long update1;
-            long delete1;
+        switch(tipoEstructura){
+            case "1":// Array Circular
+                // Create 
+                if (ordenar.equals("y")){
+                    start = System.nanoTime();
+                    for (int i = 0; i<numeroDatos; i++){
+                        int num = rand.nextInt(numeroDatos);
+                        arrayCircularSedes.insertInOrder(num);
+                    }
+                    timeCreate = (System.nanoTime()-start);
+                    timeOrder = 0;
+                }else{
+                    start = System.nanoTime();
+                    for (int i = 0; i<numeroDatos; i++){
+                        int num = rand.nextInt(numeroDatos);
+                        arrayCircularSedes.pushBack(num);
+                    }
+                    timeCreate = (System.nanoTime()-start);
 
-            long create2;
-            long read2;
-            long update2;
-            long delete2;
-            
-            
-            long start = System.nanoTime();
-            for (int i=0; i<c; i++){
-                //metodo agregar en estructura1
-                int num = rand.nextInt(c*10);
-                arrayCircularSedes.add(num);
-                linkedListSedes.add(num);
-                
+                    // Order elements
+                    start = System.nanoTime();
+                    //arrayCircularSedes.quickOrder()
+                    timeOrder = (System.nanoTime()-start);
+                }
+
+                //Read: obtener el valor del penultimo elemento en la lista
+                start = System.nanoTime();
+                arrayCircularSedes.get(arrayCircularSedes.getSize()-2);
+                timeRead = (System.nanoTime()-start);
+
+                // Delete: quitar el elemento central (peor caso porque elimina corriendo el extremo mas cerca al indice)
+                start = System.nanoTime();
+                arrayCircularSedes.get(arrayCircularSedes.getSize()/2);
+                timeDelete = (System.nanoTime()-start);
+
+                // Update: el penultimo elemento de la lista
+                start = System.nanoTime();
+                arrayCircularSedes.set(arrayCircularSedes.getSize()-1,numeroDatos + 5);
+                timeUpdate = (System.nanoTime()-start);
+
+                //Delete All
+                start = System.nanoTime();
+                while(arrayCircularSedes.getSize()>0){
+                    arrayCircularSedes.popFront();
+                }
+                timeDeleteAll = (System.nanoTime()-start);
+            break;
+
+            case "2":
+            if (ordenar.equals("y")){
+                start = System.nanoTime();
+                for (int i = 0; i<numeroDatos; i++){
+                    int num = rand.nextInt(numeroDatos);
+                    linkedListSedes.insertInOrder(num);
+                }
+                timeCreate = (System.nanoTime()-start);
+                timeOrder = 0;
+            }else{
+                start = System.nanoTime();
+                for (int i = 0; i<numeroDatos; i++){
+                    int num = rand.nextInt(numeroDatos);
+                    linkedListSedes.pushBack(num);
+                }
+                timeCreate = (System.nanoTime()-start);
+
+                // Order elements?????????????????????????????????????????????????????????????
+                start = System.nanoTime();
+                //arrayCircularSedes.quickOrder()???
+                timeOrder = (System.nanoTime()-start);
             }
-            create1 = (System.nanoTime()-start)/1000;// para tener el tiempo en milisegundos
-
-
+            
+            //Read: obtener el valor del penultimo elemento en la lista
             start = System.nanoTime();
-            for (int i=0; i<c; i++){
-                //metodo agregar en estructura2
-                int num = rand.nextInt(c*10);
-                linkedListSedes.add(num);
+            linkedListSedes.get(numeroDatos-2);
+            timeRead = (System.nanoTime()-start);
+
+            // Update: cambiar el tercer elemento por 3
+            start = System.nanoTime();
+            linkedListSedes.getHead().getNext().getNext().setData(numeroDatos + 5);
+            timeUpdate = (System.nanoTime()-start);
+
+
+            // Delete: eliminar el segundo elemento
+            start = System.nanoTime();
+            try {
+                linkedListSedes.delete(rand.nextInt(numeroDatos));
+            } catch (Exception e) {
             }
-            create2 = (System.nanoTime()-start)/1000;// para tener el tiempo en milisegundos
+            timeDelete = (System.nanoTime()-start);
 
-            createWriter.printf("%d,%d,%d,\n",c,create1,create2);// y asi con las demas medicionees
+            // Delete all
+            start = System.nanoTime();
+            while(linkedListSedes.getHead()!=null){
+                linkedListSedes.popFront();
+            }
+            timeDeleteAll = (System.nanoTime()-start);
+            break;
 
-
-
-            // Prueba 2: leer top 10 sedes por promedio de icfes: read.csv
-            // Prueba 3: Actualizar informacion de una sede: update.csv
-            // Prueba 4: Borrar el estudiante con el segundo promedio de icfes mas alto : delete.csv
-
-
-            // Clear arrays for the next tests
-            arrayCircularSedes = new ArrayList<Integer>(10);// arrayCircularSedes = new ArrayCircular(10);
-            linkedListSedes = new LinkedList<Integer>();// linkedListSedes = new LinkedList();
-
+    
+            case "3":
+            break;
         }
 
-
-        createWriter.close();
-        readWriter.close();
-        updateWriter.close();
-        deleteWriter.close();
+        System.out.println("RESULTADOS");
+        System.out.printf("%-12s%-12s%-12s%-12s%-12s%-12s\n","Create","Read","Update","Delete","Order","Delete All");
+        System.out.printf("%-12d%-12d%-12d%-12d%-12d%-12d\n",timeCreate,timeRead,timeUpdate,timeDelete,timeOrder,timeDeleteAll);
 
 
-
-
-        // Establecimiento establecimiento = faker_generador.establecimiento();
-        // Sede sede = faker_generador.sedes(establecimiento);
-        // //estructura_1_establecimiento.pushback(establecimiento);
-        // //estructura_2_sedes.pushback(sedes);
-
-        // //crea 3 icfes y los añade al atributo icfes
-        // Icfes icfes = faker_generador.sedes(establecimiento);
-        // sede.setIcfes(icfes);
-
-        // System.out.println( "Hello World!" );
-        
-
-         /*TO DO
-    * loop1 crear lista de establecimientos
-    * loop2 crear lista de sedes, esta vez cada establecimiento tiene una sola sede
-    * loop3 agregar a cada sede el puntaje de 3 años (2019,2020,2021)
-    
-    * Revisar método InOrder de la lista circular dinámica:
-    * Exception in thread "main" java.lang.IndexOutOfBoundsException
-    * at Array.addAfter(Array.java:90)
-    * at Array.insertInOrder(Array.java:169)
-    * at Main.main(Main.java:4)    
-    */
     }
 }
+
+
 
 
 
