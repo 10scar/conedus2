@@ -20,6 +20,7 @@ public class Sede implements Comparable<Sede>{
     private String modelos;
     private String[] grados;
     private ArrayCircular<Double> coordenadas;
+    private float promedio_icfes;
 
     public Sede(Establecimiento establecimientoID, String municipioID, String codigoDane, String nombre, String zona, String direccion, String telefono, String email, String sector, String estado, String[] niveles, String modelos, String[] grados, ArrayCircular<Double> coordenadas) {
         this.icfes = new  ArrayCircular<>(1); 
@@ -86,6 +87,7 @@ public class Sede implements Comparable<Sede>{
     }
     public void setIcfes(ArrayCircular<Icfes> icfes_new) {
         this.icfes = icfes_new;
+        actualizar_promedio();
     }
     
     //Getters
@@ -108,6 +110,9 @@ public class Sede implements Comparable<Sede>{
     }
     public String getZona() {
         return zona;
+    }
+    public float getPromedioIcfes() {
+        return promedio_icfes;
     }
     public String getDireccion() {
         return direccion;
@@ -140,24 +145,15 @@ public class Sede implements Comparable<Sede>{
     //metodos compare to 
 
     public int compareTo(Sede otro) {
-        ArrayCircular<Icfes> icfes_otro = otro.getIcfes();
-        if(icfes.getSize()<1){
-            return 1;
-        }else if(icfes_otro.getSize()<1){
-            return -1;
-        }
-        float promedio=0;
-        float otro_promedio =0;
-        
+        return Float.compare(promedio_icfes, otro.promedio_icfes);
+    }
+
+    public void actualizar_promedio(){
+        float promedio =0;
         for(int i =0;i<icfes.getSize();i++){
             promedio += icfes.get(i).getGlobal();
         }
-
-        for(int i =0;i<icfes.getSize();i++){
-            promedio += icfes_otro.get(i).getGlobal();
-        }
-
-        return Float.compare(promedio/icfes.getSize(), otro_promedio/icfes_otro.getSize());
+        promedio_icfes= promedio/icfes.getSize();
     }
 
 

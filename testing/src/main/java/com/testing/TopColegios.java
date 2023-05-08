@@ -87,11 +87,12 @@ public class TopColegios {
             //agrega ordenados de acuerdo a su promedio de icfes
             lista_sedes.insertInOrder(colegio);
             if(lista_sedes.getSize()>=11){
-                lista_sedes.popBack();
+                lista_sedes.popFront();
             }
         }
     long fin = System.currentTimeMillis();
     long tiempoEjecucion = fin - inicio;
+    System.out.println("Tiempo de ejecución: " + tiempoEjecucion + " milisegundos");
     lista_sedes.printList();
 }
 
@@ -115,6 +116,12 @@ public static void array_circular(int cantidad){
     long fin = System.currentTimeMillis();
     long tiempoEjecucion = fin - inicio;
     System.out.println("Tiempo de ejecución: " + tiempoEjecucion + " milisegundos");
-    lista_sedes.printArray();
+    for(int i=0;i<10;i++){
+        Sede colegio =lista_sedes.get(i);
+        System.out.println("Promedio Icfes:"+ colegio.getPromedioIcfes()+" "+ colegio.getNombre());
+    }
+
 }
+
+
 }
