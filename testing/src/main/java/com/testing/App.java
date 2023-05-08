@@ -29,6 +29,7 @@ public class App {
         long timeRead = 0L;
         long timeUpdate = 0L;
         long timeDelete = 0L;
+        long timeDeleteAll = 0L;
         
         String tipoEstructura;
         String ordenar;
@@ -88,6 +89,13 @@ public class App {
                 start = System.nanoTime();
                 arrayCircularSedes.set(arrayCircularSedes.getSize()-1,numeroDatos + 5);
                 timeUpdate = (System.nanoTime()-start);
+
+                //Delete All
+                start = System.nanoTime();
+                while(arrayCircularSedes.getSize()>0){
+                    arrayCircularSedes.popFront();
+                }
+                timeDeleteAll = (System.nanoTime()-start);
             break;
 
             case "2":
@@ -131,6 +139,13 @@ public class App {
             } catch (Exception e) {
             }
             timeDelete = (System.nanoTime()-start);
+
+            // Delete all
+            start = System.nanoTime();
+            while(linkedListSedes.getHead()!=null){
+                linkedListSedes.popFront();
+            }
+            timeDeleteAll = (System.nanoTime()-start);
             break;
 
     
@@ -139,9 +154,14 @@ public class App {
         }
 
         System.out.println("RESULTADOS");
-        System.out.printf("%-12s%-12s%-12s%-12s%-12s\n","Create","Read","Update","Delete","Order");
-        System.out.printf("%-12d%-12d%-12d%-12d%-12d\n",timeCreate,timeRead,timeUpdate,timeDelete,timeOrder);
+        System.out.printf("%-12s%-12s%-12s%-12s%-12s%-12s\n","Create","Read","Update","Delete","Order","Delete All");
+        System.out.printf("%-12d%-12d%-12d%-12d%-12d%-12d\n",timeCreate,timeRead,timeUpdate,timeDelete,timeOrder,timeDeleteAll);
 
 
     }
 }
+
+
+
+
+
