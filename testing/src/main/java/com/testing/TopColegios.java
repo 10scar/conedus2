@@ -67,6 +67,10 @@ public class TopColegios {
         case 2:
             array_circular(cantidad);
             break;
+
+        case 3:
+            lista_doble(cantidad);
+            break;
     
         default:
             System.out.println("Opción en construcción");
@@ -93,7 +97,11 @@ public class TopColegios {
     long fin = System.currentTimeMillis();
     long tiempoEjecucion = fin - inicio;
     System.out.println("Tiempo de ejecución: " + tiempoEjecucion + " milisegundos");
-    lista_sedes.printList();
+    for(int i =0;i<10;i++){
+        Sede colegio =lista_sedes.get(i);
+        System.out.println("Promedio Icfes:"+ colegio.getPromedioIcfes()+" "+ colegio.getNombre());
+    }
+    
 }
 
 public static void array_circular(int cantidad){
@@ -110,6 +118,33 @@ public static void array_circular(int cantidad){
             lista_sedes.insertInOrder(colegio);
             if(lista_sedes.getSize()>=11){
                 lista_sedes.popBack();
+            }
+        }
+
+    long fin = System.currentTimeMillis();
+    long tiempoEjecucion = fin - inicio;
+    System.out.println("Tiempo de ejecución: " + tiempoEjecucion + " milisegundos");
+    for(int i=0;i<10;i++){
+        Sede colegio =lista_sedes.get(i);
+        System.out.println("Promedio Icfes:"+ colegio.getPromedioIcfes()+" "+ colegio.getNombre());
+    }
+
+}
+
+public static void lista_doble(int cantidad){
+    FakerConedus generador_conedus = new FakerConedus();
+    Establecimiento establecimiento = generador_conedus.establecimiento();
+    DoublyLinkedListGeneric<Sede> lista_sedes = new DoublyLinkedListGeneric<>();
+
+    //inserta todos los datos de los colegios y los va ordenando de una vez, si el dato no entra en el top lo saca.
+    long inicio = System.currentTimeMillis();
+        for(int i=0;i<=cantidad;i++){
+            Sede colegio = generador_conedus.sedes(establecimiento);
+            colegio.setIcfes(generador_conedus.icfes());
+            //agrega ordenados de acuerdo a su promedio de icfes
+            lista_sedes.insertInOrder(colegio);
+            if(lista_sedes.getSize()>=11){
+                lista_sedes.popFront();
             }
         }
 
