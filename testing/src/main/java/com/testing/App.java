@@ -74,16 +74,20 @@ public class App {
                     timeOrder = (System.nanoTime()-start);
                 }
 
-            //Read: obtener el valor del penultimo elemento en la lista
-            start = System.nanoTime();
-            linkedListSedes.get(numeroDatos-2);
-            timeRead = (System.nanoTime()-start);
+                //Read: obtener el valor del penultimo elemento en la lista
+                start = System.nanoTime();
+                arrayCircularSedes.get(arrayCircularSedes.getSize()-2);
+                timeRead = (System.nanoTime()-start);
 
-            // Update: cambiar el tercer elemento por 3
-            start = System.nanoTime();
-            linkedListSedes.getHead().getNext().getNext().setData(numeroDatos + 5);
-            timeUpdate = (System.nanoTime()-start);
-                
+                // Delete: quitar el elemento central (peor caso porque elimina corriendo el extremo mas cerca al indice)
+                start = System.nanoTime();
+                arrayCircularSedes.get(arrayCircularSedes.getSize()/2);
+                timeDelete = (System.nanoTime()-start);
+
+                // Update: el penultimo elemento de la lista
+                start = System.nanoTime();
+                arrayCircularSedes.set(arrayCircularSedes.getSize()-1,numeroDatos + 5);
+                timeUpdate = (System.nanoTime()-start);
             break;
 
             case "2":
