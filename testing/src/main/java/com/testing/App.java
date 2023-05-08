@@ -139,7 +139,7 @@ public class App {
         }
 
         System.out.println("RESULTADOS");
-        System.out.printf("%-12s%-12s%-12s%-12s\n","Create","Read","Update","Delete","Order");
+        System.out.printf("%-12s%-12s%-12s%-12s%-12s\n","Create","Read","Update","Delete","Order");
         System.out.printf("%-12d%-12d%-12d%-12d%-12d\n",timeCreate,timeRead,timeUpdate,timeDelete,timeOrder);
 
 
