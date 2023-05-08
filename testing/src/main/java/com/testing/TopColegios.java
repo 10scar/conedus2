@@ -24,7 +24,7 @@ public class TopColegios {
     }
     switch (opcion) {
         case 1:
-            cantidad =1000;
+            cantidad =10000;
             break;
         case 2:
             cantidad =100000;
