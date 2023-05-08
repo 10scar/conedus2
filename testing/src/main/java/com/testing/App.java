@@ -74,9 +74,16 @@ public class App {
                     timeOrder = (System.nanoTime()-start);
                 }
 
-                // eliminar elemento dado su valor
+            //Read: obtener el valor del penultimo elemento en la lista
+            start = System.nanoTime();
+            linkedListSedes.get(numeroDatos-2);
+            timeRead = (System.nanoTime()-start);
 
-                //popback
+            // Update: cambiar el tercer elemento por 3
+            start = System.nanoTime();
+            linkedListSedes.getHead().getNext().getNext().setData(numeroDatos + 5);
+            timeUpdate = (System.nanoTime()-start);
+                
             break;
 
             case "2":
