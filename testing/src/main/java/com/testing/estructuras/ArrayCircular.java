@@ -86,7 +86,8 @@ import java.util.NoSuchElementException;
 
     // Añade un elemento después de la posición index del arreglo
 public void addAfter(int index, E element) {
-    if (index < 0 || index >= size) { // se verifica que el índice sea válido
+    if (index < -1 || index >= size) { // se verifica que el índice sea válido
+        
         throw new IndexOutOfBoundsException();
     }
     if (size == capacity) { // si el arreglo está lleno, se aumenta su capacidad
