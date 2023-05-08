@@ -30,6 +30,14 @@ import java.util.NoSuchElementException;
         return data[actualIndex];
     }
     
+    public void set(int index, E element) {
+        if (index < 0 || index >= size) { // se verifica que el índice sea válido
+            throw new IndexOutOfBoundsException();
+        }
+        int actualIndex = (head + index) % capacity; // se obtiene el índice real del elemento en el arreglo
+        data[actualIndex] = element;
+    }
+        
     // Devuelve el tamaño actual del arreglo
     public int getSize() {
         return size;
