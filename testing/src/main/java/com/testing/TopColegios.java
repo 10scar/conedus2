@@ -48,7 +48,7 @@ public class TopColegios {
 }
   public static int menu_estructura(Scanner sc){
     System.out.println("##########################/nSelecione la estructura a usar:");
-    System.out.println("(1).Lista enlazada /n(2).Lista doblemente enlazada /n(3).Array Circular");
+    System.out.println("(1).Lista enlazada /n(2).Array Circular /n(3).Lista Doblemente Enlazada");
     int opcion = sc.nextInt();
     return opcion;
     }
@@ -69,6 +69,7 @@ public class TopColegios {
             break;
     
         default:
+            System.out.println("Opción en construcción");
             break;
     }
    }
@@ -79,6 +80,7 @@ public class TopColegios {
     LinkedList<Sede> lista_sedes = new LinkedList<>();
 
     //inserta todos los datos de los colegios y los va ordenando de una vez, si el dato no entra en el top lo saca.
+    long inicio = System.currentTimeMillis();
         for(int i=0;i<=cantidad;i++){
             Sede colegio = generador_conedus.sedes(establecimiento);
             colegio.setIcfes(generador_conedus.icfes());
@@ -88,7 +90,8 @@ public class TopColegios {
                 lista_sedes.popBack();
             }
         }
-
+    long fin = System.currentTimeMillis();
+    long tiempoEjecucion = fin - inicio;
     lista_sedes.printList();
 }
 
@@ -98,6 +101,7 @@ public static void array_circular(int cantidad){
     ArrayCircular<Sede> lista_sedes = new ArrayCircular<>(2);
 
     //inserta todos los datos de los colegios y los va ordenando de una vez, si el dato no entra en el top lo saca.
+    long inicio = System.currentTimeMillis();
         for(int i=0;i<=cantidad;i++){
             Sede colegio = generador_conedus.sedes(establecimiento);
             colegio.setIcfes(generador_conedus.icfes());
@@ -108,6 +112,9 @@ public static void array_circular(int cantidad){
             }
         }
 
+    long fin = System.currentTimeMillis();
+    long tiempoEjecucion = fin - inicio;
+    System.out.println("Tiempo de ejecución: " + tiempoEjecucion + " milisegundos");
     lista_sedes.printArray();
 }
 }
