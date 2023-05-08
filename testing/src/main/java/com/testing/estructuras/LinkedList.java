@@ -15,6 +15,14 @@ public class LinkedList<T extends Comparable<T>> {
         tail = null;
         size = 0;
     }
+    
+    public Node<T> getHead(){
+        return head;
+    }
+
+    public Node<T> getTail(){
+        return tail;
+    }
 
     /**
      * Inserta un nuevo elemento al frente de la lista
