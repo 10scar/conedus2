@@ -1,1 +1,145 @@
-<p>lists works!</p>
+<app-header></app-header>
+<main>
+  <section class="filter-container">
+    <h1 class="title">Filtrar colegios</h1>
+    <div class="filters">
+      <mat-form-field>
+        <mat-label>Departamento</mat-label>
+        <mat-select [formControl]="departamentos" multiple>
+          <mat-select-trigger>
+            {{departamentos.value?.[0] || ''}}
+            <span *ngIf="(departamentos.value?.length || 0) > 1" class="example-additional-selection">
+              (+{{(departamentos.value?.length || 0) - 1 }} {{ 'más' }})
+            </span>
+          </mat-select-trigger>
+          <mat-option *ngFor="let departamento of departamentosList" [value]="departamento">{{departamento}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Municipio</mat-label>
+        <mat-select [formControl]="municipios" multiple>
+          <mat-select-trigger>
+            {{municipios.value?.[0] || ''}}
+            <span *ngIf="(municipios.value?.length || 0) > 1" class="example-additional-selection">
+              (+{{(municipios.value?.length || 0) - 1 }} {{ 'más' }})
+            </span>
+          </mat-select-trigger>
+          <mat-option *ngFor="let municipio of municipiosList" [value]="municipio">{{municipio}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Sector</mat-label>
+        <mat-select [formControl]="sectores" multiple>
+          <mat-select-trigger>
+            {{sectores.value?.[0] || ''}}
+            <span *ngIf="(sectores.value?.length || 0) > 1" class="example-additional-selection">
+              (+{{(sectores.value?.length || 0) - 1 }} {{ 'más' }})
+            </span>
+          </mat-select-trigger>
+          <mat-option *ngFor="let sectore of sectoresList" [value]="sectore">{{sectore}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Zona</mat-label>
+        <mat-select [formControl]="zonas" multiple>
+          <mat-select-trigger>
+            {{zonas.value?.[0] || ''}}
+            <span *ngIf="(zonas.value?.length || 0) > 1" class="example-additional-selection">
+              (+{{(zonas.value?.length || 0) - 1 }} {{ 'más' }})
+            </span>
+          </mat-select-trigger>
+          <mat-option *ngFor="let zona of zonasList" [value]="zona">{{zona}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Puntaje global</mat-label>
+        <input matInput type="number">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Componente</mat-label>
+        <mat-select [formControl]="componentes" multiple>
+          <mat-select-trigger>
+            {{componentes.value?.[0] || ''}}
+            <span *ngIf="(componentes.value?.length || 0) > 1" class="example-additional-selection">
+              (+{{(componentes.value?.length || 0) - 1 }} {{ 'más' }})
+            </span>
+          </mat-select-trigger>
+          <mat-option *ngFor="let componente of componentesList" [value]="componente">{{componente}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <button class="search-button">Buscar</button>
+  </section>
+
+  <section class="table-section">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <!-- Columna 1 -->
+      <ng-container matColumnDef="daneSede">
+        <th mat-header-cell *matHeaderCellDef> DANE sede </th>
+        <td mat-cell *matCellDef="let element"> {{element.columna1}} </td>
+      </ng-container>
+
+      <!-- Columna 2 -->
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef> Colegio </th>
+        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+      </ng-container>
+
+      <!-- Columna 3 -->
+      <ng-container matColumnDef="clasificacion">
+        <th mat-header-cell *matHeaderCellDef> Clasificación </th>
+        <td mat-cell *matCellDef="let element"> {{element.clasificacion}} </td>
+      </ng-container>
+
+      <!-- Columna 4 -->
+      <ng-container matColumnDef="puntajeGlobal">
+        <th mat-header-cell *matHeaderCellDef> Puntaje global </th>
+        <td mat-cell *matCellDef="let element"> {{element.puntajeGlobal}} </td>
+      </ng-container>
+
+      <!-- Columna 5 -->
+      <ng-container matColumnDef="lectura">
+        <th mat-header-cell *matHeaderCellDef> Lectura crítica </th>
+        <td mat-cell *matCellDef="let element"> {{element.lectura}} </td>
+      </ng-container>
+
+      <!-- Columna 6 -->
+      <ng-container matColumnDef="matematicas">
+        <th mat-header-cell *matHeaderCellDef> Matemáticas </th>
+        <td mat-cell *matCellDef="let element"> {{element.matematicas}} </td>
+      </ng-container>
+
+      <!-- Columna 7 -->
+      <ng-container matColumnDef="sociales">
+        <th mat-header-cell *matHeaderCellDef> Sociales y ciudadanas </th>
+        <td mat-cell *matCellDef="let element"> {{element.sociales}} </td>
+      </ng-container>
+
+      <!-- Columna 8 -->
+      <ng-container matColumnDef="ciencias">
+        <th mat-header-cell *matHeaderCellDef> Ciencias naturales </th>
+        <td mat-cell *matCellDef="let element"> {{element.ciencias}} </td>
+      </ng-container>
+
+      <!-- Columna 9 -->
+      <ng-container matColumnDef="ingles">
+        <th mat-header-cell *matHeaderCellDef> Inglés </th>
+        <td mat-cell *matCellDef="let element"> {{element.ingles}} </td>
+      </ng-container>
+
+      <!-- Encabezados de columna -->
+      <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+
+      <!-- Filas de datos -->
+      <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
+    </table>
+  </section>
+
+</main>
