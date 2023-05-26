@@ -3,6 +3,7 @@ import java.util.*;
 
 public class ArbolBST<T extends Comparable<T>> {
     private Node root;
+    private int count = 0;//printTop(n)
 
     public ArbolBST() {
         root = null;
@@ -116,6 +117,35 @@ public class ArbolBST<T extends Comparable<T>> {
         System.out.print(" " + ptr.data);
     }
     
+    public void printTopBST(int n){
+        count = 1;
+        printTop(root,n);
+    }
+
+    private Node printTop(Node ptr, int n) {// n es la cantidad de elementos que compone el top
+        if (ptr == null){// caso base
+            return null;
+        }
+        // Buscar en el sub arbol derecho
+        Node right = printTop(ptr.right,n);
+
+        if (right != null){
+            return right;
+        }
+        if (count > n){
+          return ptr;// deja de buscar  
+        }
+        // estan en el top
+        else if(count <= n){
+          System.out.println(ptr.data);
+        }
+      
+        count ++;
+
+        // Buscar en el sub arbol izquierdo
+        return printTop(ptr.left,n);
+    }
+
 
     // Inner Class: Node
     private class Node {
