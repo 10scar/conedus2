@@ -265,7 +265,7 @@ public class ArbolAVL<T extends Comparable<T>> {
         System.out.print(" " + ptr.data);
     }
    
-    public void printTopBST(int n){
+    public void printTopAVL(int n){
         count = 1;
         printTop(root,n);
     }
@@ -293,7 +293,7 @@ public class ArbolAVL<T extends Comparable<T>> {
         // Buscar en el sub arbol izquierdo
         return printTop(ptr.left,n);
     }
-
+    
     // Inner Class: Node
     private class Node {
         private Node left;
