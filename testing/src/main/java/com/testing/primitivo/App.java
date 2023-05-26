@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 package com.testing;
 import com.testing.faker_conedus.FakerConedus;
 import com.testing.estructuras.*;
@@ -165,3 +166,48 @@ public class App {
 
 
 
+=======
+package com.testing; //árbol BST
+
+import java.util.Random;
+
+import com.testing.estructuras.ArbolBST;
+
+public class Main {
+    public static void main(String[] args) {
+        startProcess();
+    }
+
+    public static void startProcess() {
+        // Insertando y a la vez ordenando
+        ArbolBST<Integer> bst = new ArbolBST<>();
+        int numPruebas = 1000;
+        Random random = new Random();
+        long startTime = System.nanoTime();
+        int randomNumber = random.nextInt(501);
+        bst.insertBST(randomNumber);
+        for (int i = 0; i < numPruebas; i++) {
+            randomNumber = random.nextInt(501);
+            bst.insertBST(randomNumber);
+        }
+        long endTime = System.nanoTime();
+        bst.inOrderBST();
+        System.out.println("La demora fue de: " + (endTime - startTime) / 1e6 + " ms");
+
+        // Insertando y después ordenando
+        ArbolBST<Integer> segundaBst = new ArbolBST<>();
+        int secondRandomNumber = random.nextInt(501);
+
+        long startSecondTime = System.nanoTime();
+        segundaBst.insertBST(secondRandomNumber);
+        for (int i = 0; i < numPruebas; i++) {
+            randomNumber = random.nextInt(501);
+            segundaBst.insertBST(randomNumber);
+        }
+        segundaBst.inOrderBST();
+        long endSecondTime = System.nanoTime();
+        System.out.println(
+                "La demora insertando y luego actualizando fue de: " + (endSecondTime - startSecondTime) / 1e6 + " ms");
+    }
+}
+>>>>>>> Stashed changes
