@@ -5,15 +5,6 @@ import com.testing.models.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-/*
- * TO DO
- * Create
- * Read
- * Update
- * Delete
- * Top 10
- */
-
 public class TiemposEntrega2 {
     private class Node {
         private Node left;
