@@ -48,7 +48,7 @@ public class TopColegios {
 }
   public static int menu_estructura(Scanner sc){
     System.out.println("##########################/nSelecione la estructura a usar:");
-    System.out.println("(1).Lista enlazada /n(2).Array Circular /n(3).Lista Doblemente Enlazada");
+    System.out.println("(1).Lista enlazada \n(2).Array Circular \n(3).Lista Doblemente Enlazada");
     int opcion = sc.nextInt();
     return opcion;
     }
@@ -98,7 +98,7 @@ public class TopColegios {
     long tiempoEjecucion = fin - inicio;
     System.out.println("Tiempo de ejecución: " + tiempoEjecucion + " milisegundos");
     for(int i =0;i<10;i++){
-        Sede colegio =lista_sedes.get(i);
+        Sede colegio =lista_sedes.get(9-i);
         System.out.println("Promedio Icfes:"+ colegio.getPromedioIcfes()+" "+ colegio.getNombre());
     }
     
@@ -125,7 +125,7 @@ public static void array_circular(int cantidad){
     long tiempoEjecucion = fin - inicio;
     System.out.println("Tiempo de ejecución: " + tiempoEjecucion + " milisegundos");
     for(int i=0;i<10;i++){
-        Sede colegio =lista_sedes.get(i);
+        Sede colegio =lista_sedes.get(9-i);
         System.out.println("Promedio Icfes:"+ colegio.getPromedioIcfes()+" "+ colegio.getNombre());
     }
 
@@ -152,7 +152,7 @@ public static void lista_doble(int cantidad){
     long tiempoEjecucion = fin - inicio;
     System.out.println("Tiempo de ejecución: " + tiempoEjecucion + " milisegundos");
     for(int i=0;i<10;i++){
-        Sede colegio =lista_sedes.get(i);
+        Sede colegio =lista_sedes.get(9-i);
         System.out.println("Promedio Icfes:"+ colegio.getPromedioIcfes()+" "+ colegio.getNombre());
     }
 
