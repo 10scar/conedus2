@@ -1,4 +1,4 @@
-package com.testing;
+package com.primitivo; //arbolBST
 
 import java.util.Random;
 
