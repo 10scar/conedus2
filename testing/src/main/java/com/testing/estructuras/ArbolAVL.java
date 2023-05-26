@@ -3,6 +3,7 @@ import java.util.*;
 
 public class ArbolAVL<T extends Comparable<T>> {
     private Node root;
+    private int count = 0;//printTop(n)
 
     public ArbolAVL() {
         root = null;
@@ -263,8 +264,7 @@ public class ArbolAVL<T extends Comparable<T>> {
             postOrder(ptr.right);
         System.out.print(" " + ptr.data);
     }
-    
-    private count = 0;
+   
     public void printTopBST(int n){
         count = 1;
         printTop(root,n);
