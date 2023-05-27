@@ -1,0 +1,28 @@
+main {
+  width: 100%;
+  min-height: calc(100vh - 120px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image {
+  width: 30%;
+}
+
+.title {
+  font-size: 28px;
+  color: var(--red);
+  font-weight: 500;
+}
+
+.subtitle {
+  font-size: 20px;
+}
