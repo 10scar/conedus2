@@ -314,6 +314,7 @@ public class ArbolAVL<T extends Comparable<T>> {
         arbol.insertAVL(9);
         arbol.insertAVL(2);
         arbol.insertAVL(8);
+        arbol.insertAVL(8);
 
         arbol.removeAVL(2);
         arbol.removeAVL(6);
