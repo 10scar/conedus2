@@ -1,4 +1,4 @@
-package com.testing.estructuras;
+package com.conedus.backend.estructuras;
 import java.util.*;
 
 public class ArbolAVL<T extends Comparable<T>> {
@@ -293,6 +293,20 @@ public class ArbolAVL<T extends Comparable<T>> {
         // Buscar en el sub arbol izquierdo
         return printTop(ptr.left,n);
     }
+
+    public List<T> getObjectsInArray() {
+        List<T> objects = new ArrayList<>();
+        getObjects(root, objects);
+        return objects;
+    }
+
+    private void getObjects(Node p, List<T> objects) {
+        if (p != null) {
+            getObjects(p.left, objects);
+            objects.add(p.data);
+            getObjects(p.right, objects);
+        }
+    }
     
     // Inner Class: Node
     private class Node {
@@ -313,7 +327,6 @@ public class ArbolAVL<T extends Comparable<T>> {
         arbol.insertAVL(5);
         arbol.insertAVL(9);
         arbol.insertAVL(2);
-        arbol.insertAVL(8);
         arbol.insertAVL(8);
 
         arbol.removeAVL(2);
