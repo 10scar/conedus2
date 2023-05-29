@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/shared/services/api.service';
 
 import { ColegioFiltro } from 'src/app/shared/interfaces/Conedus.interfaces';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-lists',
@@ -37,8 +38,17 @@ export class ListsComponent {
   ){}
 
   ngOnInit(){
-    this.apiService.get<ColegioFiltro[]>('lista').then((lista: ColegioFiltro[]) => {
+    this.getData();
+  }
+
+  getData(){
+    this.apiService.get<ColegioFiltro[]>('lista')
+    .then((lista: ColegioFiltro[]) => {
       this.dataSource = new MatTableDataSource<ColegioFiltro>(lista);
+    })
+    .catch(err => {
+      console.error(err);
+      Swal.fire('Error', 'Se presentó un error, contacte al administrador', 'error');
     })
   }
 

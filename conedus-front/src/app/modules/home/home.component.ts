@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ColegioPorMunicipio, MejorColegio } from 'src/app/shared/interfaces/Conedus.interfaces';
 import { ApiService } from 'src/app/shared/services/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -161,6 +162,7 @@ export class HomeComponent implements OnInit {
       })
       .catch((err) => {
         console.log('Hubo un error', err);
+        Swal.fire('Error', 'Se presentó un error, contacte al administrador', 'error');
       })
   }
 }
