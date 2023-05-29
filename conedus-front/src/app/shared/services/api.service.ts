@@ -14,7 +14,7 @@ export interface Usuario {
 })
 export class ApiService {
 
-  readonly URL: string = 'localhost:8090';
+  url: string = 'http://localhost:8090';
 
   constructor(
     private http: HttpClient
@@ -22,7 +22,7 @@ export class ApiService {
 
   get<T>(endpoint: string): Promise<T> {
     return new Promise((resolve, reject) => {
-      this.http.get<T>(`${URL}/api/${endpoint}`).subscribe(
+      this.http.get<T>(`${this.url}/api/${endpoint}`).subscribe(
         (response: T) => {
           resolve(response)
         },

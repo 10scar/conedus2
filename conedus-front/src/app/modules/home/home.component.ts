@@ -156,8 +156,9 @@ export class HomeComponent implements OnInit {
    * Obtiene la información de los tops
    */
   getBestSchools(){
-    this.apiService.get<MejorColegio[]>('top')
+    this.apiService.get<MejorColegio[]>('sede/top')
       .then((mejores) => {
+        console.log(mejores);
         this.mejoresColombia = mejores
       })
       .catch((err) => {

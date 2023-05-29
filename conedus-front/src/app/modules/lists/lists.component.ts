@@ -42,7 +42,7 @@ export class ListsComponent {
   }
 
   getData(){
-    this.apiService.get<ColegioFiltro[]>('lista')
+    this.apiService.get<ColegioFiltro[]>('sede/lists')
     .then((lista: ColegioFiltro[]) => {
       this.dataSource = new MatTableDataSource<ColegioFiltro>(lista);
     })
