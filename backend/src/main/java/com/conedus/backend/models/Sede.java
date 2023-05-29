@@ -144,7 +144,12 @@ public class Sede implements Comparable<Sede>{
     //metodos compare to 
 
     public int compareTo(Sede otro) {
-        return Float.compare(promedio_icfes, otro.promedio_icfes);
+        int resultado = Float.compare(promedio_icfes, otro.promedio_icfes);
+        if(resultado==0){
+            resultado= 1;
+        }
+        return resultado;
+
     }
 
     public void actualizar_promedio(){

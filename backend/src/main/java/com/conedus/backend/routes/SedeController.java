@@ -97,15 +97,15 @@ public class SedeController {
 
         //crear arbol avl con los resultados
         ArbolAVL<Sede> arbol_sedes = new ArbolAVL<>();
-
+        int pro_count = 0;
         // Procesar los resultados
         for (Map<String, Object> fila : resultados) {
-    
+            pro_count++;
             //traer datos
             int sede_id = (Integer) fila.get("sede_id");
             ArrayCircular<Icfes> icfes = new ArrayCircular<>(2);
-            //get_icfes(icfes, sede_id);
-            //icfes.printArray();
+            get_icfes(icfes, sede_id);
+            icfes.printArray();
             municipioID= Integer.toString((int) fila.get("municipio_id"));
             codigoDane= (String) fila.get("sede_dane");
             nombre= (String) fila.get("sede_nombre");
@@ -126,11 +126,12 @@ public class SedeController {
             if(icfes.getSize()>0){
                 promedio_icfes = count/icfes.getSize();
             }
-            
+            promedio_icfes= pro_count;
             String sql_pro = "SELECT sum(icfes_global)/count(*) as pro FROM ouvxvkkq_conedus_pruebas.icfes where sedes_id=1 group by sedes_id";
             List<Map<String, Object>> resultados_pro = jdbcTemplate.queryForList(sql_pro);
             //promedio_icfes=  (float) BigDecimal(resultados_pro.get(0).get("pro"));
             nueva_sede = new Sede(default_establecimiento, municipioID, codigoDane, nombre, zona, direccion, telefono, email, sector, estado, niveles, modelos, grados, coordenadas);    
+            nueva_sede.setIcfes(icfes);
             arbol_sedes.insertAVL(nueva_sede);
             // Hacer algo con los valores
         }
