@@ -322,6 +322,27 @@ public class ArbolAVL<T extends Comparable<T>> {
         }
     }
 
+    public List<T> getTopObjects(int n) {
+        List<T> objects = new ArrayList<>();
+        getTopObjects(root, n, objects);
+        return objects;
+    }
+
+    private void getTopObjects(Node p, int n, List<T> objects) {
+        if (p == null || objects.size() >= n) {
+            return;
+        }
+
+        // Recorrido en orden inverso para obtener los objetos de mayor valor primero
+        getTopObjects(p.right, n, objects);
+
+        if (objects.size() < n) {
+            objects.add(p.data);
+        }
+
+        getTopObjects(p.left, n, objects);
+    }
+
     public static void main(String[] args) {
         ArbolAVL<Integer> arbol = new ArbolAVL<>();
         arbol.insertAVL(5);

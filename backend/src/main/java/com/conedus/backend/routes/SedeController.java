@@ -1,11 +1,11 @@
 package com.conedus.backend.routes;
 import com.google.gson.Gson;
 import org.springframework.jdbc.core.JdbcTemplate;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.math.BigDecimal;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -71,7 +71,7 @@ public class SedeController {
         }
     }
     public ArbolAVL<Sede> get_data() {
-        String sql = "SELECT * FROM ouvxvkkq_conedus_pruebas.sedes limit 10";
+        String sql = "SELECT * FROM ouvxvkkq_conedus_pruebas.sedes limit 100";
         String valorColumna1 = null;
 
         Sede nueva_sede;
@@ -105,7 +105,7 @@ public class SedeController {
             int sede_id = (Integer) fila.get("sede_id");
             ArrayCircular<Icfes> icfes = new ArrayCircular<>(2);
             get_icfes(icfes, sede_id);
-            icfes.printArray();
+        
             municipioID= Integer.toString((int) fila.get("municipio_id"));
             codigoDane= (String) fila.get("sede_dane");
             nombre= (String) fila.get("sede_nombre");
@@ -119,16 +119,9 @@ public class SedeController {
             modelos= (String) fila.get("sede_modelos");;
             grados=new String[0];;
             coordenadas= new ArrayCircular<>(2);
-            int count = 0;
-            for(int i=0; i<icfes.getSize();i++){
-                count += icfes.get(i).getGlobal();
-            }
-            if(icfes.getSize()>0){
-                promedio_icfes = count/icfes.getSize();
-            }
-            promedio_icfes= pro_count;
-            String sql_pro = "SELECT sum(icfes_global)/count(*) as pro FROM ouvxvkkq_conedus_pruebas.icfes where sedes_id=1 group by sedes_id";
-            List<Map<String, Object>> resultados_pro = jdbcTemplate.queryForList(sql_pro);
+    
+            //String sql_pro = "SELECT sum(icfes_global)/count(*) as pro FROM ouvxvkkq_conedus_pruebas.icfes where sedes_id=1 group by sedes_id";
+            //List<Map<String, Object>> resultados_pro = jdbcTemplate.queryForList(sql_pro);
             //promedio_icfes=  (float) BigDecimal(resultados_pro.get(0).get("pro"));
             nueva_sede = new Sede(default_establecimiento, municipioID, codigoDane, nombre, zona, direccion, telefono, email, sector, estado, niveles, modelos, grados, coordenadas);    
             nueva_sede.setIcfes(icfes);
@@ -141,8 +134,28 @@ public class SedeController {
 
 
     @GetMapping("/top")
-    public String holas(){
-        return "Hola mundosss21";
+    public String op(){
+        String json = "";
+        ArbolAVL<Sede> arbol_sedes = get_data();
+
+        //para retornar el json
+        List<Sede> fina_arr = arbol_sedes.getTopObjects(10);
+        List<String> json_arr = new ArrayList<String>();
+        Gson gson = new Gson();
+        if(fina_arr.size()>0){
+            for(Sede sedes:fina_arr){
+                String data = "{municipio_nombre:'"+sedes.getNombre()+"' ,promedio:'"+sedes.getPromedioIcfes()+"', establecimiento_nombre: '"+sedes.getNombre()+"', establecimiento_sector: '"+sedes.getSector()+"', establecimiento_genero: 'MASCULINO', id: "+sedes.getCodigoDane()+" }";
+            json_arr.add(data);
+            }
+        
+        json = gson.toJson(json_arr);
+        json =  StringEscapeUtils.unescapeJava(json);
+      
+        }
+        
+       
+    
+        return json;
     }
 }
 
