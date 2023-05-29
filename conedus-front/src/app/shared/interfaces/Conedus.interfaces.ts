@@ -63,7 +63,7 @@ export interface Sede {
   sede_coordenadas: Coordenadas;
 }
 
-export interface TOP10Colegios {
+export interface MejorColegio {
   municipio_nombre: string;
   establecimiento_nombre: string;
   establecimiento_sector: 'OFICIAL' | 'NO OFICIAL';
@@ -76,6 +76,18 @@ export interface ColegioPorMunicipio {
   establecimiento_nombre: string;
   establecimiento_sector: 'OFICIAL' | 'NO OFICIAL';
   establecimiento_genero: 'MASCULINO' | 'FEMENINO' | 'MIXTO';
+}
+
+export interface ColegioFiltro {
+  daneSede: number,
+  nombre: string,
+  clasificacion: string,
+  puntajeGlobal: number,
+  lectura: number,
+  sociales: number,
+  ciencias: number,
+  matematicas: number,
+  ingles: number,
 }
 
 

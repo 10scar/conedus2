@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Colegio, ColegioPorMunicipio, Coordenadas, Establecimiento, TOP10Colegios } from 'src/app/shared/interfaces/Conedus.interfaces';
+import { ColegioPorMunicipio, MejorColegio } from 'src/app/shared/interfaces/Conedus.interfaces';
 import { ApiService } from 'src/app/shared/services/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,7 @@ import { ApiService } from 'src/app/shared/services/api.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  mejoresColombia: TOP10Colegios[] = [
+  mejoresColombia: MejorColegio[] = [
     {
       establecimiento_genero: 'MIXTO',
       establecimiento_nombre: 'Colegio Bilingüe Diana Oese',
@@ -120,6 +121,7 @@ export class HomeComponent implements OnInit {
   ){}
 
   ngOnInit(){
+    this.getBestSchools();
     this.requestLocation();
   }
 
@@ -150,13 +152,17 @@ export class HomeComponent implements OnInit {
     })
   }
 
-
+  /**
+   * Obtiene la información de los tops
+   */
   getBestSchools(){
-    this.apiService.get()
-      .then((mejores: any) =>
-        this.mejoresColombia = mejores.mejoresColombia,
-
-      )
-      .catch()
+    this.apiService.get<MejorColegio[]>('top')
+      .then((mejores) => {
+        this.mejoresColombia = mejores
+      })
+      .catch((err) => {
+        console.log('Hubo un error', err);
+        Swal.fire('Error', 'Se presentó un error, contacte al administrador', 'error');
+      })
   }
 }
