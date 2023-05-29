@@ -1,13 +1,10 @@
 package com.conedus.backend.routes;
 import com.google.gson.Gson;
 import org.springframework.jdbc.core.JdbcTemplate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang3.StringEscapeUtils;
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import java.math.BigDecimal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +15,7 @@ import com.conedus.backend.estructuras.ArrayCircular;
 import com.conedus.backend.models.*;;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/sede")
 public class SedeController {
 
     @Autowired
@@ -134,27 +131,63 @@ public class SedeController {
 
 
     @GetMapping("/top")
-    public String op(){
+    public String top(){
         String json = "";
         ArbolAVL<Sede> arbol_sedes = get_data();
 
         //para retornar el json
         List<Sede> fina_arr = arbol_sedes.getTopObjects(10);
-        List<String> json_arr = new ArrayList<String>();
+        List<Map<String, Object>> json_arr = new ArrayList<>();
         Gson gson = new Gson();
         if(fina_arr.size()>0){
+
             for(Sede sedes:fina_arr){
-                String data = "{municipio_nombre:'"+sedes.getNombre()+"' ,promedio:'"+sedes.getPromedioIcfes()+"', establecimiento_nombre: '"+sedes.getNombre()+"', establecimiento_sector: '"+sedes.getSector()+"', establecimiento_genero: 'MASCULINO', id: "+sedes.getCodigoDane()+" }";
-            json_arr.add(data);
+                Map<String, Object> props = new HashMap<>();
+                props.put("municipio_nombre", sedes.getNombre());
+                props.put("promedio", sedes.getPromedioIcfes());
+                props.put("establecimiento_nombre", sedes.getNombre());
+                props.put("establecimiento_sector", sedes.getSector());
+                props.put("establecimiento_genero", "MASCULINO");
+                props.put("id", sedes.getCodigoDane());
+                json_arr.add(props);
             }
         
         json = gson.toJson(json_arr);
-        json =  StringEscapeUtils.unescapeJava(json);
-      
         }
-        
-       
-    
+        return json;
+    }
+
+    @GetMapping("/lists")
+    public String lists(){
+        String json = "";
+        ArbolAVL<Sede> arbol_sedes = get_data();
+
+        //para retornar el json
+        List<Sede> fina_arr = arbol_sedes.getTopObjects(10);
+        List<Map<String, Object>> json_arr = new ArrayList<>();
+        Gson gson = new Gson();
+        if(fina_arr.size()>0){
+            for(Sede sedes:fina_arr){
+                Random random = new Random();
+                Map<String, Object> props = new HashMap<>();
+                props.put("daneSede", sedes.getCodigoDane());
+                props.put("nombre", sedes.getNombre());
+                props.put("clasificacion", sedes.getDireccion());
+                props.put("puntajeGlobal", (int) sedes.getPromedioIcfes());
+                props.put("lectura", random.nextInt(501));
+                props.put("sociales", random.nextInt(501));
+                props.put("ciencias", random.nextInt(501));
+                props.put("matematicas", random.nextInt(501));
+                props.put("ingles", random.nextInt(501));
+                json_arr.add(props);
+            }
+
+            json = gson.toJson(json_arr);
+
+        }
+
+
+
         return json;
     }
 }
