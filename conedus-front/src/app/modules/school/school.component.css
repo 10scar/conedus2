@@ -1,0 +1,45 @@
+main {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.info-section {
+  width: 70%;
+  display: inline-block;
+  margin: 0;
+  padding: 20px;
+}
+
+.divider {
+  display: flex;
+  justify-content: left;
+  gap: 20px;
+}
+
+.school-name {
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.field {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+
+  font-size: 16px;
+
+  margin-bottom: 10px;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+}
+
+.related-schools {
+  width: 30%;
+  display: inline-block;
+  vertical-align: top;
+  padding: 20px;
+}
