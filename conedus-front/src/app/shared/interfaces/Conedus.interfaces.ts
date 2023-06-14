@@ -74,11 +74,19 @@ export interface ColegioInfo {
   establecimientoGenero: 'MASCULINO' | 'FEMENINO' | 'MIXTO';
   establecimientoJornadas: 'Mañana' | 'Tarde' | 'Noche' | 'Mañana y tarde' | 'Tarde y noche' | 'Jornada continua';
   sedeZona: 'URBANA' | 'RURAL';
-  icfes?: Icfes
+  icfes?: Icfes[]
 }
 
 export interface Icfes {
-
+  id: number,
+  year: number,
+  global: number,
+  matematicas: number,
+  lectura: number,
+  sociales: number,
+  ciencias: number,
+  ingles: number,
+  sedeId: number
 }
 
 export interface ColegioPorMunicipio {
