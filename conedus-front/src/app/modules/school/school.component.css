@@ -37,6 +37,14 @@ main {
   margin-right: 5px;
 }
 
+.info-icfes {
+  width: 100%;
+}
+
+.canvas {
+  width: 100%;
+}
+
 .related-schools {
   width: 30%;
   display: inline-block;
