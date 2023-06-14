@@ -1,0 +1,54 @@
+<app-header></app-header>
+<main *ngIf="this.schoolInfo">
+  <section class="info-section">
+    <h1 class="school-name">{{ schoolInfo.establecimientoNombre }}</h1>
+    <div class="divider">
+      <div>
+        <div class="field">
+          <img src="assets/icons/location.svg" alt="Ubicación" class="icon">
+          <span>{{ schoolInfo.establecimientoDireccion || 'No definido' }}</span>
+        </div>
+        <div class="field">
+          <img src="assets/icons/cellphone.svg" alt="Teléfono" class="icon">
+          <span>{{ schoolInfo.establecimientoTelefono || 'No definido' }}</span>
+        </div>
+        <div class="field">
+          <img src="assets/icons/rector.svg" alt="Director" class="icon">
+          <span>Rector: {{ schoolInfo.establecimientoRector || 'No definido' }}</span>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <img src="assets/icons/sector.svg" alt="Sector" class="icon">
+          <span>{{ schoolInfo.establecimientoSector || 'No definido' }}</span>
+        </div>
+        <div class="field">
+          <img src="assets/icons/woman.svg" alt="Mujer" class="icon"
+            *ngIf="schoolInfo.establecimientoGenero == 'MIXTO' || schoolInfo.establecimientoGenero == 'FEMENINO'">
+          <img src="assets/icons/man.svg" alt="Hombre" class="icon"
+            *ngIf="schoolInfo.establecimientoGenero == 'MIXTO' || schoolInfo.establecimientoGenero == 'MASCULINO'">
+          <span>{{ schoolInfo.establecimientoGenero || 'No definido' }}</span>
+        </div>
+        <div class="field">
+          <img [src]="'assets/icons/' + imagenPorJornada[schoolInfo.establecimientoJornadas]"
+            [alt]="schoolInfo.establecimientoJornadas" class="icon">
+          <span>Jornadas: {{ schoolInfo.establecimientoJornadas }}</span>
+        </div>
+        <div class="field">
+          <img src="assets/icons/city.svg" alt="Zona urbana" class="icon" *ngIf="schoolInfo.sedeZona == 'URBANA'">
+          <img src="assets/icons/farm.svg" alt="Zona rural" class="icon" *ngIf="schoolInfo.sedeZona == 'RURAL'">
+          <span>{{ schoolInfo.sedeZona || 'No definido' }}</span>
+        </div>
+      </div>
+    </div>
+    <article>
+      <h2>Desempeño en el ranking ICFES</h2>
+    </article>
+  </section>
+  <section class="related-schools">
+    <div>
+    <h2>Colegios relacionados</h2>
+
+    </div>
+  </section>
+</main>

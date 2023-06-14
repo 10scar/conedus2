@@ -10,5 +10,8 @@
   --red: #851e1e;
 }
 
-html, body { height: 100%; box-sizing: border-box; }
+* {
+  box-sizing: border-box !important;
+}
+html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
