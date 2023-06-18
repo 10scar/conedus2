@@ -63,12 +63,30 @@ export interface Sede {
   sede_coordenadas: Coordenadas;
 }
 
-export interface TOP10Colegios {
-  municipio_nombre: string;
-  establecimiento_nombre: string;
-  establecimiento_sector: 'OFICIAL' | 'NO OFICIAL';
-  establecimiento_genero: 'MASCULINO' | 'FEMENINO' | 'MIXTO';
-  id: number
+export interface ColegioInfo {
+  establecimientoNombre: string;
+  establecimientoDane: string;
+  establecimientoDireccion: string;
+  establecimientoTelefono: string;
+  establecimientoCorreo: string;
+  establecimientoRector: string;
+  establecimientoSector: 'OFICIAL' | 'NO OFICIAL';
+  establecimientoGenero: 'MASCULINO' | 'FEMENINO' | 'MIXTO';
+  establecimientoJornadas: 'Mañana' | 'Tarde' | 'Noche' | 'Mañana y tarde' | 'Tarde y noche' | 'Jornada continua';
+  sedeZona: 'URBANA' | 'RURAL';
+  icfes?: Icfes[]
+}
+
+export interface Icfes {
+  id: number,
+  year: number,
+  global: number,
+  matematicas: number,
+  lectura: number,
+  sociales: number,
+  ciencias: number,
+  ingles: number,
+  sedeId: number
 }
 
 export interface ColegioPorMunicipio {
@@ -76,6 +94,22 @@ export interface ColegioPorMunicipio {
   establecimiento_nombre: string;
   establecimiento_sector: 'OFICIAL' | 'NO OFICIAL';
   establecimiento_genero: 'MASCULINO' | 'FEMENINO' | 'MIXTO';
+}
+
+export interface MejorColegio extends ColegioPorMunicipio {
+  id: number
+}
+
+export interface ColegioFiltro {
+  daneSede: number,
+  nombre: string,
+  clasificacion: string,
+  puntajeGlobal: number,
+  lectura: number,
+  sociales: number,
+  ciencias: number,
+  matematicas: number,
+  ingles: number,
 }
 
 

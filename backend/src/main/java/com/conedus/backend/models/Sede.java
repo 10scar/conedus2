@@ -1,8 +1,7 @@
-package com.testing.models;
-
-import com.testing.estructuras.ArrayCircular;
-import com.testing.estructuras.LinkedList;
-import com.testing.models.Icfes;
+package com.conedus.backend.models;
+import com.conedus.backend.estructuras.ArrayCircular;
+import com.conedus.backend.estructuras.LinkedList;
+import com.conedus.backend.models.Icfes;
 public class Sede implements Comparable<Sede>{
 
     private Establecimiento establecimiento_ref;
@@ -150,6 +149,7 @@ public class Sede implements Comparable<Sede>{
             resultado= 1;
         }
         return resultado;
+
     }
 
     public void actualizar_promedio(){

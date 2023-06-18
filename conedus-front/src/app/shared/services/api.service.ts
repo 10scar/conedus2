@@ -14,15 +14,23 @@ export interface Usuario {
 })
 export class ApiService {
 
+  url: string = 'http://localhost:8090';
+
   constructor(
     private http: HttpClient
   ) { }
 
-  get(): Promise<string> {
+  get<T>(endpoint: string): Promise<T> {
     return new Promise((resolve, reject) => {
-      // this.http.get<Usuario[]>('api/usuarios/').subscribe((response) => {
-
-      // })
+      this.http.get<T>(`${this.url}/api/${endpoint}`).subscribe(
+        (response: T) => {
+          resolve(response)
+        },
+        (err) => {
+          console.error('Error en la petición GET');
+          reject(err);
+        }
+      )
     })
   }
 }

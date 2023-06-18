@@ -20,6 +20,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/map/map.module').then(m => m.MapModule),
   },
   {
+    path: 'establecimiento',
+    loadChildren: () => import('./modules/school/school.module').then(m => m.SchoolModule),
+  },
+  {
     path: '**',
     component: NotFoundComponent
   }
