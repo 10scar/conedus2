@@ -1,0 +1,11 @@
+<main class="main">
+  <form class="login" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <label class="login__label" for="username">Usuario:</label>
+    <input class="login__input" type="text" id="username" name="username" formControlName="username" required>
+
+    <label class="login__label" for="password">Contraseña:</label>
+    <input class="login__input" type="password" id="password" name="password" formControlName="password" required>
+
+    <button class="login__button" type="submit">Iniciar sesión</button>
+  </form>
+</main>
