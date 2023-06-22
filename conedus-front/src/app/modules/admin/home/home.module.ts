@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { RouterModule, Routes } from '@angular/router';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { AdminGuard } from '../admin.guard';
 
 const routes: Routes = [
   {
@@ -16,7 +18,9 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forRoot(roots)
-  ]
+    SharedModule,
+    RouterModule.forChild(routes)
+  ],
+  providers: [AdminGuard]
 })
 export class HomeModule { }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import * as bcryptjs from 'bcryptjs';
 
 @Component({
   selector: 'app-admin',
@@ -30,11 +31,9 @@ export class AdminComponent {
   }
 
   onSubmit(){
-    if(this.loginForm.controls['username'].value == 'admin' && this.loginForm.controls['password'].value == 'admin'){
-      localStorage.setItem('conedus-username', this.loginForm.controls['username'].value);
-      localStorage.setItem('conedus-pass', this.loginForm.controls['password'].value);
-      this.router.navigate(['admin/home']);
-    }
+    localStorage.setItem('conedus-username', this.loginForm.controls['username'].value);
+    localStorage.setItem('conedus-pass', bcryptjs.hashSync(this.loginForm.controls['password'].value));
+    this.router.navigate(['admin/home']);
   }
 
 }
