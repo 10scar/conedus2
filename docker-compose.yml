@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+    backend:
+        image: demo
+        container_name: demo
+        build:
+            context: ./backend
+        ports:
+            - "8090:8090"
+    web:
+      build:
+        context: conedus-front
+        target: builder
+      ports:
+        - 80:4200
+      
+      volumes:
+        - ./conedus-front:/project
+        - /project/node_modules
+      
