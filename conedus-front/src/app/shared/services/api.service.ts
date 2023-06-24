@@ -14,7 +14,7 @@ export interface Usuario {
 })
 export class ApiService {
 
-  url: string = 'http://localhost:8090';
+  url: string = 'http://ec2-15-229-60-182.sa-east-1.compute.amazonaws.com:8090';
 
   constructor(
     private http: HttpClient
