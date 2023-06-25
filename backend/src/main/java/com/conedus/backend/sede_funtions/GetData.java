@@ -14,8 +14,8 @@ import com.conedus.backend.models.Sede;
 
 public class GetData {
     @Autowired
-     JdbcTemplate jdbcTemplate;
-     
+    JdbcTemplate jdbcTemplate;
+
     public ArbolAVL<Sede> get_data() {
         String sql = "SELECT * FROM ouvxvkkq_conedus_pruebas.sedes limit 10";
         String valorColumna1 = "nada";
