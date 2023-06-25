@@ -18,7 +18,6 @@ export class AdminGuard implements CanActivate {
     if(user == null || pass == null) return false;
 
     if(user == 'admin' && bcryptjs.compareSync('admin', pass.toString())){
-      console.log('retorna ture')
       return true;
     } else {
       console.log('mal')

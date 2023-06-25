@@ -33,4 +33,19 @@ export class ApiService {
       )
     })
   }
+
+  patch<T>(endpoint: string, body: T): Promise<T> {
+    return new Promise((resolve, reject) => {
+      this.http.patch<T>(`${this.url}/api/${endpoint}`, body).subscribe(
+        (response: T) => {
+          resolve(response)
+        },
+        (err) => {
+          console.error('Error en la petición PATCH');
+          reject(err);
+        }
+      )
+    })
+  }
+
 }

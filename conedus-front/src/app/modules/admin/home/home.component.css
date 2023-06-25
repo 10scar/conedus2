@@ -5,9 +5,9 @@ main {
 }
 
 .title {
-  font-size: 20px;
   color: var(--dark-blue);
   text-align: center;
+  font-weight: 500;
 }
 
 .table-container {

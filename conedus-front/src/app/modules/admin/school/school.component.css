@@ -1,0 +1,32 @@
+main {
+  width: 100%;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.title {
+  color: var(--dark-blue);
+  font-weight: 500;
+}
+
+.fields-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-flow: row;
+  gap: 20px;
+}
+
+.school-field {
+  width: 220px;
+}
+
+.update-button {
+  width: 150px;
+  height: 50px;
+  text-align: center;
+  border: none;
+  background-color: var(--dark-blue);
+  color: var(--white);
+  border-radius: 10px;
+  font-size: 18px;
+}

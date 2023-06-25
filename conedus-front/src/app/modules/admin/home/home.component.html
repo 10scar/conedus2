@@ -6,7 +6,7 @@
       <!-- Columna 1 -->
       <ng-container matColumnDef="sede_dane">
         <th mat-header-cell *matHeaderCellDef> DANE sede </th>
-        <td mat-cell *matCellDef="let element" [class.no-hovered]="!isCellHovered" (click)="editSchool(element.codigoDane)"> {{element.codigoDane}} </td>
+        <td mat-cell *matCellDef="let element" [class.no-hovered]="!isCellHovered" (click)="editSchool(element.codigoDane, element)"> {{element.codigoDane}} </td>
       </ng-container>
 
       <!-- Columna 2 -->

@@ -49,7 +49,7 @@ export interface Establecimiento {
 export interface Sede {
   sede_id: number;
   establecimiento_id: number;
-  municipio_id: number;
+  municipioID: number;
   sede_dane: string;
   sede_nombre: string;
   sede_zona: 'URBANA' | 'RURAL';
@@ -58,10 +58,12 @@ export interface Sede {
   sede_email: string;
   sede_sector: 'OFICIAL' | 'NO OFICIAL';
   sede_estado: 'NUEVO-ACTIVO' | 'ANTIGUO-ACTIVO' | 'CIERRE DEFINITIVO' | 'CIERRE TEMPORAL';
-  sede_niveles: string;
-  sede_grados: string;
-  sede_coordenadas: Coordenadas;
+  niveles: string;
+  grados: string;
+  coordenadas: Coordenadas;
   promedio_icfes: string;
+  icfes: any;
+  establecimiento: any;
 }
 
 export interface ColegioInfo {

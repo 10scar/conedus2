@@ -1,8 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Establecimiento, Sede } from 'src/app/shared/interfaces/Conedus.interfaces';
 import { ApiService } from 'src/app/shared/services/api.service';
+import { AdminService } from '../admin.service';
 
 
 
@@ -23,7 +25,9 @@ export class HomeComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
-    private apiService: ApiService
+    private apiService: ApiService,
+    private router: Router,
+    private adminService: AdminService
   ){}
 
   ngAfterViewInit() {
@@ -43,7 +47,9 @@ export class HomeComponent {
     )
   }
 
-  editSchool(codigoDane: string){
-    console.log(codigoDane);
+  editSchool(codigoDane: string, element: Sede){
+    console.log(codigoDane, element);
+    this.adminService.setSede(element);
+    this.router.navigate([`admin/school/${codigoDane}`]);
   }
 }

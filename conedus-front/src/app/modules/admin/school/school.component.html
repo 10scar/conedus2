@@ -1,0 +1,56 @@
+<main>
+  <h1 class="title">Información de la sede {{ schoolInfo.sede_nombre }}</h1>
+  <form action="" [formGroup]="schoolForm" (ngSubmit)="updateSchool()">
+    <div class="fields-container">
+
+      <mat-form-field class="school-field">
+        <mat-label>Nombre de la sede</mat-label>
+        <input matInput placeholder="Nombre de la sede" formControlName="nombre">
+      </mat-form-field>
+
+      <mat-form-field class="school-field">
+        <mat-label>Zona</mat-label>
+        <input matInput placeholder="Zona" formControlName="zona">
+      </mat-form-field>
+
+      <mat-form-field class="school-field">
+        <mat-label>Dirección</mat-label>
+        <input matInput placeholder="Dirección" formControlName="direccion">
+      </mat-form-field>
+
+      <mat-form-field class="school-field">
+        <mat-label>Teléfono</mat-label>
+        <input matInput placeholder="Teléfono" formControlName="telefono">
+      </mat-form-field>
+
+      <mat-form-field class="school-field">
+        <mat-label>Estado</mat-label>
+        <input matInput placeholder="Estado" formControlName="estado">
+      </mat-form-field>
+
+      <mat-form-field class="school-field">
+        <mat-label>Sector</mat-label>
+        <input matInput placeholder="Sector" formControlName="sector">
+      </mat-form-field>
+
+      <mat-form-field class="school-field">
+        <mat-label>Modelos</mat-label>
+        <input matInput placeholder="Modelos" formControlName="modelos">
+      </mat-form-field>
+
+      <mat-form-field class="school-field">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Email" type="email" formControlName="email">
+      </mat-form-field>
+
+      <mat-form-field class="school-field">
+        <mat-label>Promedio</mat-label>
+        <input matInput placeholder="Promedio" type="number" formControlName="promedio">
+      </mat-form-field>
+
+
+      <button class="update-button">Actualizar</button>
+    </div>
+
+  </form>
+</main>
