@@ -8,9 +8,11 @@
         <input matInput placeholder="Nombre de la sede" formControlName="nombre">
       </mat-form-field>
 
-      <mat-form-field class="school-field">
+      <mat-form-field style="max-width:220px !important">
         <mat-label>Zona</mat-label>
-        <input matInput placeholder="Zona" formControlName="zona">
+        <mat-select formControlName="zona">
+          <mat-option *ngFor="let zone of zonesTypes" [value]="zone">{{zone}}</mat-option>
+        </mat-select>
       </mat-form-field>
 
       <mat-form-field class="school-field">
@@ -23,20 +25,27 @@
         <input matInput placeholder="Teléfono" formControlName="telefono">
       </mat-form-field>
 
-      <mat-form-field class="school-field">
+      <mat-form-field style="max-width:220px !important">
         <mat-label>Estado</mat-label>
-        <input matInput placeholder="Estado" formControlName="estado">
+        <mat-select formControlName="estado">
+          <mat-option *ngFor="let estado of statusTypes" [value]="estado">{{estado}}</mat-option>
+        </mat-select>
       </mat-form-field>
 
-      <mat-form-field class="school-field">
+      <mat-form-field style="max-width:220px !important">
         <mat-label>Sector</mat-label>
-        <input matInput placeholder="Sector" formControlName="sector">
+        <mat-select formControlName="sector">
+          <mat-option *ngFor="let sector of sectorsTypes" [value]="sector">{{sector}}</mat-option>
+        </mat-select>
       </mat-form-field>
 
-      <mat-form-field class="school-field">
+      <mat-form-field style="max-width:220px !important">
         <mat-label>Modelos</mat-label>
-        <input matInput placeholder="Modelos" formControlName="modelos">
+        <mat-select formControlName="modelos">
+          <mat-option *ngFor="let modelos of modelsTypes" [value]="modelos">{{modelos}}</mat-option>
+        </mat-select>
       </mat-form-field>
+
 
       <mat-form-field class="school-field">
         <mat-label>Email</mat-label>
@@ -45,7 +54,7 @@
 
       <mat-form-field class="school-field">
         <mat-label>Promedio</mat-label>
-        <input matInput placeholder="Promedio" type="number" formControlName="promedio">
+        <input matInput placeholder="Promedio (0 - 500)" type="number" formControlName="promedio">
       </mat-form-field>
 
 
