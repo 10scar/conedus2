@@ -193,6 +193,15 @@ public void printArray() {
     System.out.println("]");
 }
 
+public String stringkey() {
+    String key = "";
+    for (int i = 0; i < size; i++) {
+        int actualIndex = (head + i) % capacity;
+        key+=data[actualIndex];
+    }
+    return key;
+}
+
 public void insertInOrder(E elemento) {
     if (size == capacity) {
         grow();

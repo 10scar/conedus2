@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.conedus.backend.estructuras.ArbolAVL;
 import com.conedus.backend.estructuras.ArrayCircular;
 import com.conedus.backend.models.*;
+import com.conedus.backend.sede_funtions.FiltradorTabla;
+
 
 @RestController
 @RequestMapping("/sede")
@@ -40,6 +42,25 @@ public class SedeController {
        //System.out.println(json);
         return json;
     }
+
+
+    @GetMapping("/filtro")
+    public String filtro(){
+        String json = "";
+        FiltradorTabla tabla = new FiltradorTabla(jdbcTemplate);
+        ArrayCircular<String> filtros = new ArrayCircular<>(2);
+        filtros.pushBack("5"); //departamento
+        filtros.pushBack("5"); //municipio
+        filtros.pushBack("OFICIAL"); //SECTOR
+        filtros.pushBack("URBANA"); //ZONA
+        filtros.pushBack("100"); //puntaje global
+        System.out.println(filtros.stringkey());
+
+        tabla.get_data_filter(filtros).printList();
+        
+        return json;
+    }
+
 
 
 

@@ -1,7 +1,6 @@
 package com.conedus.backend.sede_funtions;
 
 import java.util.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -13,20 +12,20 @@ import com.conedus.backend.models.Sede;
 public class FiltradorTabla {
 
     //crea una tabla hash vacia por defecto al creaar el objeto filtro
-    private HashTable<String,Sede> hash_colegios = new HashTable<>(); 
+    public HashTable<String,Sede> hash_colegios; 
     @Autowired
      JdbcTemplate jdbcTemplate;
 
-    public FiltradorTabla(){
-        HashTable<String,Sede> hash_colegios = new HashTable<>();
+    public FiltradorTabla(JdbcTemplate jdbc){
+        hash_colegios = new HashTable<>();
+        jdbcTemplate = jdbc;
     }
 
-    public ArbolAVL<Sede> get_data() {
-        String sql = "SELECT * FROM ouvxvkkq_conedus_pruebas.sedes limit 100";
-        String valorColumna1 = null;
-
-        Sede nueva_sede;
+    public com.conedus.backend.estructuras.LinkedList get_data_filter(ArrayCircular<String> filtros) {
         
+        String sql = "SELECT * FROM ouvxvkkq_conedus_pruebas.sedes limit 200000";
+        String valorColumna1 = null;
+        Sede nueva_sede;
         String municipioID;
         String codigoDane;
         String nombre;
@@ -41,21 +40,23 @@ public class FiltradorTabla {
         String[] grados;
         ArrayCircular<Double> coordenadas;
         float promedio_icfes=0;
+        String key; // key para hashtable
+        int filtro_global = Integer.valueOf(filtros.get(4));
 
         // Ejecutar la consulta
         Establecimiento default_establecimiento = new Establecimiento(valorColumna1, valorColumna1, valorColumna1, valorColumna1, valorColumna1, valorColumna1, valorColumna1, valorColumna1, valorColumna1, valorColumna1, valorColumna1, valorColumna1, valorColumna1, valorColumna1, valorColumna1, valorColumna1, valorColumna1, valorColumna1, valorColumna1, valorColumna1, valorColumna1, valorColumna1, null, 0, valorColumna1, null);
         List<Map<String, Object>> resultados = jdbcTemplate.queryForList(sql);
-
-        //crear arbol avl con los resultados
-        ArbolAVL<Sede> arbol_sedes = new ArbolAVL<>();
+   
         int pro_count = 0;
         // Procesar los resultados
         for (Map<String, Object> fila : resultados) {
+            ArrayCircular<String> datos_colegio = new ArrayCircular<>(2);
             pro_count++;
             //traer datos
             int sede_id = (Integer) fila.get("sede_id");
             ArrayCircular<Icfes> icfes = new ArrayCircular<>(2);
-            get_icfes(icfes, sede_id);
+
+            //get_icfes(icfes, sede_id);
         
             municipioID= Integer.toString((int) fila.get("municipio_id"));
             codigoDane= (String) fila.get("sede_dane");
@@ -70,16 +71,32 @@ public class FiltradorTabla {
             modelos= (String) fila.get("sede_modelos");;
             grados=new String[0];;
             coordenadas= new ArrayCircular<>(2);
-    
-            //String sql_pro = "SELECT sum(icfes_global)/count(*) as pro FROM ouvxvkkq_conedus_pruebas.icfes where sedes_id=1 group by sedes_id";
-            //List<Map<String, Object>> resultados_pro = jdbcTemplate.queryForList(sql_pro);
-            //promedio_icfes=  (float) BigDecimal(resultados_pro.get(0).get("pro"));
+
+            //datos para el filtro
+            datos_colegio.pushBack(municipioID);
+            datos_colegio.pushBack(municipioID);
+            datos_colegio.pushBack(sector);
+            datos_colegio.pushBack(zona);
+            
+
             nueva_sede = new Sede(default_establecimiento, municipioID, codigoDane, nombre, zona, direccion, telefono, email, sector, estado, niveles, modelos, grados, coordenadas);    
             nueva_sede.setIcfes(icfes);
-            arbol_sedes.insertAVL(nueva_sede);
-            // Hacer algo con los valores
+
+            
+            key = key_filter(filtros,datos_colegio);
+            if(key ==filtros.stringkey()){
+                System.out.println(key);
+            }
+            
+            if(nueva_sede.getPromedioIcfes()>= filtro_global || filtro_global==0){ 
+                hash_colegios.add(key, nueva_sede);
+            }
+            
+            
+            
         }
-        return arbol_sedes;
+       
+        return hash_colegios.getChainWithKey(filtros.stringkey());
     }
 
 
@@ -106,6 +123,33 @@ public class FiltradorTabla {
             nuevo_icfes = new Icfes(año, global, matematicas, lectura, sociales, ciencias, ingles);
             array.pushBack(nuevo_icfes);
         }
+    }
+
+    public String key_filter(ArrayCircular<String> filtros, ArrayCircular<String> datos){
+        String key = "";
+        //recorrem,os las opciones del filtro menos la de academico y si esta agregamos al string la opcion si no dejamos como NA
+        for(int i = 0;i< filtros.getSize()-1;i++){
+            if(filtros.get(i)!="NA"){
+            key+=datos.get(i);
+            }else{
+             key+="NA";
+            }
+        }
+
+        key+="100";
+        return key;
+    }
+
+    public static void main(String[] args) {
+       /*  FiltradorTabla tabla = new FiltradorTabla();
+        ArrayCircular<String> filtros = new ArrayCircular<>(2);
+        filtros.pushBack("5"); //departamento
+        filtros.pushBack("5"); //municipio
+        filtros.pushBack("OFICIAL"); //SECTOR
+        filtros.pushBack("URBANA"); //ZONA
+        filtros.pushBack("100"); //puntaje global
+
+        tabla.get_data_filter(filtros).printList(); */
     }
     
 }
