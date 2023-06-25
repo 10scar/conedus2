@@ -3,13 +3,17 @@ package com.conedus.backend.repositories;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.conedus.backend.models.Sede;
-import com.conedus.interfaces.ISedeRepository;
+import com.conedus.backend.interfaces.ISedeRepository;
 
+@Repository
 public class SedeRepository implements ISedeRepository {
 
+  @Autowired
   private JdbcTemplate jdbcTemplate;
 
   @Override
@@ -19,19 +23,20 @@ public class SedeRepository implements ISedeRepository {
   }
 
   @Override
-  public Sede createSede() {
+  public Sede createSede(Sede sede) {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'createSede'");
   }
 
   @Override
-  public Sede updateSede() {
+  public Sede updateSede(Sede sede) {
     // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'updateSede'");
+    jdbcTemplate.update("UPDATE sedes WHERE sede_dane = ?", sede.getCodigoDane());
+    return sede;
   }
 
   @Override
-  public void deleteSede() {
+  public void deleteSede(String id) {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'deleteSede'");
   }
