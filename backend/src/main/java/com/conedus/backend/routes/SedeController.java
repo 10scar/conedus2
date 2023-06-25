@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.conedus.backend.estructuras.ArbolAVL;
 import com.conedus.backend.estructuras.ArrayCircular;
-import com.conedus.backend.models.*;;
+import com.conedus.backend.models.*;
 
 @RestController
 @RequestMapping("/sede")
