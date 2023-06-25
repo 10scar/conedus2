@@ -1,0 +1,23 @@
+main {
+  padding-top: 20px;
+  width: 100%;
+  min-width: 100vh;
+}
+
+.title {
+  font-size: 20px;
+  color: var(--dark-blue);
+  text-align: center;
+}
+
+.table-container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.no-hovered {
+  color: var(--dark-blue);
+  cursor: pointer;
+  text-decoration: none;
+}
+

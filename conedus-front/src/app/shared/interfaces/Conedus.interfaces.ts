@@ -61,6 +61,7 @@ export interface Sede {
   sede_niveles: string;
   sede_grados: string;
   sede_coordenadas: Coordenadas;
+  promedio_icfes: string;
 }
 
 export interface ColegioInfo {

@@ -1,1 +1,66 @@
-<p>home works!</p>
+<main>
+  <h1 class="title">Admin Conedus</h1>
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <!-- Columna 1 -->
+      <ng-container matColumnDef="sede_dane">
+        <th mat-header-cell *matHeaderCellDef> DANE sede </th>
+        <td mat-cell *matCellDef="let element" [class.no-hovered]="!isCellHovered" (click)="editSchool(element.codigoDane)"> {{element.codigoDane}} </td>
+      </ng-container>
+
+      <!-- Columna 2 -->
+      <ng-container matColumnDef="sede_nombre">
+        <th mat-header-cell *matHeaderCellDef> Colegio </th>
+        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+      </ng-container>
+
+      <!-- Columna 3 -->
+      <ng-container matColumnDef="sede_estado">
+        <th mat-header-cell *matHeaderCellDef> Estado </th>
+        <td mat-cell *matCellDef="let element"> {{element.estado}} </td>
+      </ng-container>
+
+      <!-- Columna 4 -->
+      <ng-container matColumnDef="promedio_icfes">
+        <th mat-header-cell *matHeaderCellDef> Promedio ICFES </th>
+        <td mat-cell *matCellDef="let element"> {{element.promedio_icfes}} </td>
+      </ng-container>
+
+      <!-- Columna 5 -->
+      <ng-container matColumnDef="sede_sector">
+        <th mat-header-cell *matHeaderCellDef> Sector </th>
+        <td mat-cell *matCellDef="let element"> {{element.sector}} </td>
+      </ng-container>
+
+      <!-- Columna 6 -->
+      <ng-container matColumnDef="sede_telefono">
+        <th mat-header-cell *matHeaderCellDef> Teléfono </th>
+        <td mat-cell *matCellDef="let element"> {{element.telefono}} </td>
+      </ng-container>
+
+      <!-- Columna 7 -->
+      <ng-container matColumnDef="sede_direccion">
+        <th mat-header-cell *matHeaderCellDef> Dirección </th>
+        <td mat-cell *matCellDef="let element"> {{element.direccion}} </td>
+      </ng-container>
+
+      <!-- Columna 8 -->
+      <ng-container matColumnDef="sede_email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+
+      <!-- Encabezados de columna -->
+      <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+
+      <!-- Filas de datos -->
+      <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
+    </table>
+    <mat-paginator [length]="100"
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      aria-label="Select page">
+    </mat-paginator>
+  </div>
+</main>
