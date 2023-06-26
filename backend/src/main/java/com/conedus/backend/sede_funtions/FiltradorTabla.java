@@ -86,9 +86,7 @@ public class FiltradorTabla {
 
             
             String key = key_filter(filtros,datos_colegio);
-            if(key.equals(filtros.stringkey())){
-                System.out.println(key);
-            }
+        
             if((nueva_sede.getPromedioIcfes()>= filtro_global || filtro_global==0) &&key.equals(filtros.stringkey())){ 
                 hash_colegios.add(key, nueva_sede);
             }
@@ -104,10 +102,9 @@ public class FiltradorTabla {
         String key = "";
         //recorrem,os las opciones del filtro menos la de academico y si esta agregamos al string la opcion si no dejamos como NA
         for(int i = 0;i< filtros.getSize()-1;i++){
-            if(filtros.get(i)!="NA"){
+            if(!filtros.get(i).equals("NA")){
             key+=datos.get(i);
             }else{
-                System.out.println(key);
              key+="NA";
             }
         }

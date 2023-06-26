@@ -257,10 +257,32 @@ public class SedeService implements ISedeService {
     
 
     List<Sede> datos = tabla.get_data_filter(filtros).arrayList();
-    Gson gson = new Gson();
-    if (datos.size() > 0) {
-      json = gson.toJson(datos);
-    }
-    return json;
+    List<Map<String, Object>> json_arr = new ArrayList<>();
+      Gson gson = new Gson();
+      if (datos.size() > 0) {
+        for (Sede sedes : datos) {
+            Random random = new Random();
+            Map<String, Object> props = new HashMap<>();
+            props.put("municipioID", sedes.getMunicipioID());
+            props.put("codigoDane", sedes.getCodigoDane());
+            props.put("direccion", sedes.getDireccion());
+            props.put("nombre", sedes.getNombre());
+            props.put("telefono", sedes.getTelefono());
+            props.put("zona", sedes.getZona());
+            props.put("email", sedes.getEmail());
+            props.put("sector", sedes.getSector());
+            props.put("clasificacion", sedes.getDireccion());
+            props.put("puntajeGlobal", (int) sedes.getPromedioIcfes());
+            props.put("lectura", random.nextInt(501));
+            props.put("sociales", random.nextInt(501));
+            props.put("ciencias", random.nextInt(501));
+            props.put("matematicas", random.nextInt(501));
+            props.put("ingles", random.nextInt(501));
+            json_arr.add(props);
+        }
+        json = gson.toJson(json_arr);
+    
   }
+  return json;
+}
 }
