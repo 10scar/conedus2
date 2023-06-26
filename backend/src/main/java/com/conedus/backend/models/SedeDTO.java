@@ -1,85 +1,85 @@
 package com.conedus.backend.models;
 
 public class SedeDTO {
-  private String sede_dane;
-  private String sede_nombre;
-  private String sede_zona;
-  private String sede_direccion;
-  private String sede_telefono;
-  private String sede_estado;
-  private String sede_sector;
-  private String sede_modelos;
-  private String sede_email;
+  private String sedeDane;
+  private String sedeNombre;
+  private String sedeZona;
+  private String sedeDireccion;
+  private String sedeTelefono;
+  private String sedeEstado;
+  private String sedeSector;
+  private String sedeModelos;
+  private String sedeEmail;
 
   public String getSedeDane() {
-    return sede_dane;
+    return sedeDane;
   }
 
-  public void setSedeDane(String sede_dane) {
-    this.sede_dane = sede_dane;
+  public void setSedeDane(String sedeDane) {
+    this.sedeDane = sedeDane;
   }
 
   public String getSedeNombre() {
-    return sede_nombre;
+    return sedeNombre;
   }
 
-  public void setSedeNombre(String sede_nombre) {
-    this.sede_nombre = sede_nombre;
+  public void setSedeNombre(String sedeNombre) {
+    this.sedeNombre = sedeNombre;
   }
 
   public String getSedeZona() {
-    return sede_zona;
+    return sedeZona;
   }
 
-  public void setSedeZona(String sede_zona) {
-    this.sede_zona = sede_zona;
+  public void setSedeZona(String sedeZona) {
+    this.sedeZona = sedeZona;
   }
 
   public String getSedeDireccion() {
-    return sede_direccion;
+    return sedeDireccion;
   }
 
-  public void setSedeDireccion(String sede_direccion) {
-    this.sede_direccion = sede_direccion;
+  public void setSedeDireccion(String sedeDireccion) {
+    this.sedeDireccion = sedeDireccion;
   }
 
   public String getSedeTelefono() {
-    return sede_telefono;
+    return sedeTelefono;
   }
 
-  public void setSedeTelefono(String sede_telefono) {
-    this.sede_telefono = sede_telefono;
+  public void setSedeTelefono(String sedeTelefono) {
+    this.sedeTelefono = sedeTelefono;
   }
 
   public String getSedeEstado() {
-    return sede_estado;
+    return sedeEstado;
   }
 
-  public void setSedeEstado(String sede_estado) {
-    this.sede_estado = sede_estado;
+  public void setSedeEstado(String sedeEstado) {
+    this.sedeEstado = sedeEstado;
   }
 
   public String getSedeSector() {
-    return sede_sector;
+    return sedeSector;
   }
 
-  public void setSedeSector(String sede_sector) {
-    this.sede_sector = sede_sector;
+  public void setSedeSector(String sedeSector) {
+    this.sedeSector = sedeSector;
   }
 
   public String getSedeModelos() {
-    return sede_modelos;
+    return sedeModelos;
   }
 
-  public void setSedeModelos(String sede_modelos) {
-    this.sede_modelos = sede_modelos;
+  public void setSedeModelos(String sedeModelos) {
+    this.sedeModelos = sedeModelos;
   }
 
   public String getSedeEmail() {
-    return sede_email;
+    return sedeEmail;
   }
 
-  public void setSedeEmail(String sede_email) {
-    this.sede_email = sede_email;
+  public void setSedeEmail(String sedeEmail) {
+    this.sedeEmail = sedeEmail;
   }
 }

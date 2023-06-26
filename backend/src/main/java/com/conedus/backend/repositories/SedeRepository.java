@@ -32,7 +32,9 @@ public class SedeRepository implements ISedeRepository {
   @Override
   public SedeDTO updateSede(SedeDTO sede) {
     // TODO Auto-generated method stub
-    jdbcTemplate.update("UPDATE sedes WHERE sede_dane = ?", sede.getSedeDane());
+    jdbcTemplate.update(
+        "UPDATE sedes SET sede_nombre = ?, sede_zona = ?, sede_direccion = ?, sede_telefono = ?, sede_email = ?, sede_sector = ?, sede_estado = ?, sede_modelos = ? WHERE sede_dane = ?",
+        sede.getSedeNombre(), sede.getSedeZona(), sede.getSedeDireccion(), sede.getSedeTelefono(), sede.getSedeEmail(), sede.getSedeSector(), sede.getSedeEstado(), sede.getSedeModelos(), sede.getSedeDane());
     return sede;
   }
 
@@ -41,8 +43,8 @@ public class SedeRepository implements ISedeRepository {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'deleteSede'");
   }
-  
-  public List<Map<String, Object>> queryForList(String sql){
+
+  public List<Map<String, Object>> queryForList(String sql) {
     return jdbcTemplate.queryForList(sql);
   }
 

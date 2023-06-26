@@ -27,7 +27,6 @@ public class SedeController {
     @GetMapping("/sedes")
     @ResponseStatus(HttpStatus.OK)
     public String obtenerSedes() {
-        System.out.println("Entra aqui");
         return service.getSedes();
     }
 
@@ -39,7 +38,6 @@ public class SedeController {
     @PutMapping("/prueba")
     @ResponseStatus(HttpStatus.OK)
     public SedeDTO actualizarSede(@RequestBody SedeDTO request) {
-
         if(request.getSedeDane() == null || request.getSedeDane().equals("")){
             throw new BadRequestException("No se encuentra el id");
         }
