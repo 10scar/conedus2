@@ -39,7 +39,7 @@ public class FiltradorTabla {
         String[] grados;
         ArrayCircular<Double> coordenadas;
         float promedio_icfes=0;
-        String key; // key para hashtable
+         // key para hashtable
         int filtro_global = Integer.valueOf(filtros.get(4));
 
         // Ejecutar la consulta
@@ -85,11 +85,11 @@ public class FiltradorTabla {
             nueva_sede.setPromedioIcfes(promedio_icfes);
 
             
-            key = key_filter(filtros,datos_colegio);
-            if(key==filtros.stringkey()){
+            String key = key_filter(filtros,datos_colegio);
+            if(key.equals(filtros.stringkey())){
                 System.out.println(key);
             }
-            if(nueva_sede.getPromedioIcfes()>= filtro_global || filtro_global==0){ 
+            if((nueva_sede.getPromedioIcfes()>= filtro_global || filtro_global==0) &&key.equals(filtros.stringkey())){ 
                 hash_colegios.add(key, nueva_sede);
             }
             
@@ -112,7 +112,7 @@ public class FiltradorTabla {
             }
         }
 
-        key+=filtros.get(4);
+        //key+=filtros.get(4);
         return key;
     }
 
