@@ -1,5 +1,6 @@
 package com.conedus.backend.estructuras;
 
+import java.util.*;
 import java.util.NoSuchElementException;
 
 public class LinkedList<T extends Comparable<T>> {
@@ -227,6 +228,16 @@ public class LinkedList<T extends Comparable<T>> {
             System.out.println(current.getData());
             current = current.getNext();
         }
+    }
+
+    public List<T> arrayList() {
+        List<T> objects = new ArrayList<>();
+        Node<T> current = head;
+        while (current != null) {
+            objects.add(current.getData());
+            current = current.getNext();
+        }
+        return objects;
     }
 
     /**

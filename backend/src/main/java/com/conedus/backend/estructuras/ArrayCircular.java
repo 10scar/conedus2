@@ -195,7 +195,7 @@ public void printArray() {
 
 public String stringkey() {
     String key = "";
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < size-1; i++) {
         int actualIndex = (head + i) % capacity;
         key+=data[actualIndex];
     }
