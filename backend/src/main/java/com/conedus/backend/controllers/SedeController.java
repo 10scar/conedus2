@@ -1,4 +1,6 @@
 package com.conedus.backend.controllers;
+import com.conedus.backend.handlers.BadRequestException;
+import com.conedus.backend.models.SedeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,9 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.conedus.backend.handlers.BadRequestException;
-import com.conedus.backend.handlers.NotFoundException;
-import com.conedus.backend.models.Sede;
 import com.conedus.backend.services.SedeService;
 
 @RestController
@@ -28,6 +27,7 @@ public class SedeController {
     @GetMapping("/sedes")
     @ResponseStatus(HttpStatus.OK)
     public String obtenerSedes() {
+        System.out.println("Entra aqui");
         return service.getSedes();
     }
 
@@ -36,14 +36,14 @@ public class SedeController {
      * 
      * @return La sede actualizada
      */
-    @PutMapping("/sede")
+    @PutMapping("/prueba")
     @ResponseStatus(HttpStatus.OK)
-    public Sede actualizarSede(@RequestBody Sede request) {
-        if(request.getCodigoDane() == null || request.getCodigoDane().equals("")){
+    public SedeDTO actualizarSede(@RequestBody SedeDTO request) {
+
+        if(request.getSedeDane() == null || request.getSedeDane().equals("")){
             throw new BadRequestException("No se encuentra el id");
         }
         return service.updateSede(request);
-
     }
 
     @GetMapping("/filtro")

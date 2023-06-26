@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.conedus.backend.models.Sede;
+import com.conedus.backend.models.SedeDTO;
 import com.conedus.backend.interfaces.ISedeRepository;
 
 @Repository
@@ -23,15 +24,15 @@ public class SedeRepository implements ISedeRepository {
   }
 
   @Override
-  public Sede createSede(Sede sede) {
+  public SedeDTO createSede(SedeDTO sede) {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'createSede'");
   }
 
   @Override
-  public Sede updateSede(Sede sede) {
+  public SedeDTO updateSede(SedeDTO sede) {
     // TODO Auto-generated method stub
-    jdbcTemplate.update("UPDATE sedes WHERE sede_dane = ?", sede.getCodigoDane());
+    jdbcTemplate.update("UPDATE sedes WHERE sede_dane = ?", sede.getSedeDane());
     return sede;
   }
 

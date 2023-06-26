@@ -1,7 +1,5 @@
 package com.conedus.backend.models;
 import com.conedus.backend.estructuras.ArrayCircular;
-import com.conedus.backend.estructuras.LinkedList;
-import com.conedus.backend.models.Icfes;
 public class Sede implements Comparable<Sede>{
 
     private Establecimiento establecimiento_ref;
@@ -37,8 +35,7 @@ public class Sede implements Comparable<Sede>{
         this.modelos = modelos;
         this.grados = grados;
         this.coordenadas = coordenadas;
-}
-  
+    }
     //Setters
 
 

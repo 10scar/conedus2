@@ -14,6 +14,7 @@ import com.conedus.backend.estructuras.ArrayCircular;
 import com.conedus.backend.models.Establecimiento;
 import com.conedus.backend.models.Icfes;
 import com.conedus.backend.models.Sede;
+import com.conedus.backend.models.SedeDTO;
 import com.conedus.backend.repositories.SedeRepository;
 import com.conedus.backend.interfaces.ISedeService;
 import com.google.gson.Gson;
@@ -41,13 +42,13 @@ public class SedeService implements ISedeService {
   }
 
   @Override
-  public Sede createSede(Sede sede) {
+  public SedeDTO createSede(SedeDTO sede) {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'createSede'");
   }
 
   @Override
-  public Sede updateSede(Sede sede) {
+  public SedeDTO updateSede(SedeDTO sede) {
     return repo.updateSede(sede);
   }
 
