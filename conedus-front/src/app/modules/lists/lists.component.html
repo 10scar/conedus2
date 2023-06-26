@@ -5,38 +5,35 @@
     <div class="filters">
       <mat-form-field>
         <mat-label>Departamento</mat-label>
-        <mat-select [formControl]="departamentos" multiple>
+        <mat-select [formControl]="departamento" (change)="getMunicipalitiesFromDep()">
           <mat-select-trigger>
-            {{departamentos.value?.[0] || ''}}
-            <span *ngIf="(departamentos.value?.length || 0) > 1" class="example-additional-selection">
+            {{departamento.value ? departamento.value.departamento_nombre : ''}}
+            <!-- <span *ngIf="(departamentos.value?.length || 0) > 1" class="example-additional-selection">
               (+{{(departamentos.value?.length || 0) - 1 }} {{ 'más' }})
-            </span>
+            </span> -->
           </mat-select-trigger>
-          <mat-option *ngFor="let departamento of departamentosList" [value]="departamento">{{departamento}}</mat-option>
+          <mat-option *ngFor="let departamento of departamentosList" [value]="departamento">{{departamento.departamento_nombre}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Municipio</mat-label>
-        <mat-select [formControl]="municipios" multiple>
+        <mat-select [formControl]="municipio">
           <mat-select-trigger>
-            {{municipios.value?.[0] || ''}}
-            <span *ngIf="(municipios.value?.length || 0) > 1" class="example-additional-selection">
+            {{municipio.value ? municipio.value.municipio_nombre : ''}}
+            <!-- <span *ngIf="(municipios.value?.length || 0) > 1" class="example-additional-selection">
               (+{{(municipios.value?.length || 0) - 1 }} {{ 'más' }})
-            </span>
+            </span> -->
           </mat-select-trigger>
-          <mat-option *ngFor="let municipio of municipiosList" [value]="municipio">{{municipio}}</mat-option>
+          <mat-option *ngFor="let municipio of municipiosList" [value]="municipio">{{municipio.municipio_nombre}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Sector</mat-label>
-        <mat-select [formControl]="sectores" multiple>
+        <mat-select [formControl]="sector">
           <mat-select-trigger>
-            {{sectores.value?.[0] || ''}}
-            <span *ngIf="(sectores.value?.length || 0) > 1" class="example-additional-selection">
-              (+{{(sectores.value?.length || 0) - 1 }} {{ 'más' }})
-            </span>
+            {{sector.value || ''}}
           </mat-select-trigger>
           <mat-option *ngFor="let sectore of sectoresList" [value]="sectore">{{sectore}}</mat-option>
         </mat-select>
@@ -44,12 +41,9 @@
 
       <mat-form-field>
         <mat-label>Zona</mat-label>
-        <mat-select [formControl]="zonas" multiple>
+        <mat-select [formControl]="zona">
           <mat-select-trigger>
-            {{zonas.value?.[0] || ''}}
-            <span *ngIf="(zonas.value?.length || 0) > 1" class="example-additional-selection">
-              (+{{(zonas.value?.length || 0) - 1 }} {{ 'más' }})
-            </span>
+            {{zona.value || ''}}
           </mat-select-trigger>
           <mat-option *ngFor="let zona of zonasList" [value]="zona">{{zona}}</mat-option>
         </mat-select>
@@ -57,10 +51,10 @@
 
       <mat-form-field>
         <mat-label>Puntaje global</mat-label>
-        <input matInput type="number">
+        <input matInput type="number" [formControl]="puntajeGlobal">
       </mat-form-field>
 
-      <mat-form-field>
+      <!-- <mat-form-field>
         <mat-label>Componente</mat-label>
         <mat-select [formControl]="componentes" multiple>
           <mat-select-trigger>
@@ -71,10 +65,10 @@
           </mat-select-trigger>
           <mat-option *ngFor="let componente of componentesList" [value]="componente">{{componente}}</mat-option>
         </mat-select>
-      </mat-form-field>
+      </mat-form-field> -->
     </div>
 
-    <button class="search-button">Buscar</button>
+    <button class="search-button" (click)="filter()">Buscar</button>
   </section>
 
   <section class="table-section">
@@ -83,55 +77,55 @@
       <!-- Columna 1 -->
       <ng-container matColumnDef="daneSede">
         <th mat-header-cell *matHeaderCellDef> DANE sede </th>
-        <td mat-cell *matCellDef="let element"> {{element.daneSede}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.daneSede || 'No definido'}} </td>
       </ng-container>
 
       <!-- Columna 2 -->
       <ng-container matColumnDef="nombre">
         <th mat-header-cell *matHeaderCellDef> Colegio </th>
-        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.nombre || 'No definido'}} </td>
       </ng-container>
 
       <!-- Columna 3 -->
       <ng-container matColumnDef="clasificacion">
         <th mat-header-cell *matHeaderCellDef> Clasificación </th>
-        <td mat-cell *matCellDef="let element"> {{element.clasificacion}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.clasificacion || 'No definido'}} </td>
       </ng-container>
 
       <!-- Columna 4 -->
       <ng-container matColumnDef="puntajeGlobal">
         <th mat-header-cell *matHeaderCellDef> Puntaje global </th>
-        <td mat-cell *matCellDef="let element"> {{element.puntajeGlobal}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.puntajeGlobal || 'No definido'}} </td>
       </ng-container>
 
       <!-- Columna 5 -->
       <ng-container matColumnDef="lectura">
         <th mat-header-cell *matHeaderCellDef> Lectura crítica </th>
-        <td mat-cell *matCellDef="let element"> {{element.lectura}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.lectura || 'No definido'}} </td>
       </ng-container>
 
       <!-- Columna 6 -->
       <ng-container matColumnDef="matematicas">
         <th mat-header-cell *matHeaderCellDef> Matemáticas </th>
-        <td mat-cell *matCellDef="let element"> {{element.matematicas}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.matematicas || 'No definido'}} </td>
       </ng-container>
 
       <!-- Columna 7 -->
       <ng-container matColumnDef="sociales">
         <th mat-header-cell *matHeaderCellDef> Sociales y ciudadanas </th>
-        <td mat-cell *matCellDef="let element"> {{element.sociales}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.sociales || 'No definido'}} </td>
       </ng-container>
 
       <!-- Columna 8 -->
       <ng-container matColumnDef="ciencias">
         <th mat-header-cell *matHeaderCellDef> Ciencias naturales </th>
-        <td mat-cell *matCellDef="let element"> {{element.ciencias}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.ciencias || 'No definido'}} </td>
       </ng-container>
 
       <!-- Columna 9 -->
       <ng-container matColumnDef="ingles">
         <th mat-header-cell *matHeaderCellDef> Inglés </th>
-        <td mat-cell *matCellDef="let element"> {{element.ingles}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.ingles || 'No definido'}} </td>
       </ng-container>
 
       <!-- Encabezados de columna -->
