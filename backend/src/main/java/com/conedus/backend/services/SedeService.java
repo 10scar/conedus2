@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.conedus.backend.estructuras.ArbolAVL;
 import com.conedus.backend.estructuras.ArrayCircular;
@@ -14,10 +15,10 @@ import com.conedus.backend.models.Establecimiento;
 import com.conedus.backend.models.Icfes;
 import com.conedus.backend.models.Sede;
 import com.conedus.backend.repositories.SedeRepository;
-import com.conedus.backend.sede_funtions.FiltradorTabla;
-import com.conedus.interfaces.ISedeService;
+import com.conedus.backend.interfaces.ISedeService;
 import com.google.gson.Gson;
 
+@Service
 public class SedeService implements ISedeService {
 
   @Autowired
@@ -41,18 +42,18 @@ public class SedeService implements ISedeService {
   }
 
   @Override
-  public Sede createSede() {
+  public Sede createSede(Sede sede) {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'createSede'");
   }
 
   @Override
-  public Sede updateSede() {
-    return repo.createSede();
+  public Sede updateSede(Sede sede) {
+    return repo.updateSede(sede);
   }
 
   @Override
-  public void deleteSede() {
+  public void deleteSede(String id) {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'deleteSede'");
   }
