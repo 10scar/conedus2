@@ -94,7 +94,6 @@ export class ListsComponent {
     this.apiService.get<Municipio[]>('sede/municipios').then(
       (municipios) => {
         this.municipiosSaved = municipios;
-        console.log(this.municipiosSaved);
       },
       (err) => {
         console.error(err);
