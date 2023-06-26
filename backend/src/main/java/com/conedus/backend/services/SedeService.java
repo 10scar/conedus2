@@ -37,10 +37,29 @@ public class SedeService implements ISedeService {
     if (fina_arr.size() > 0) {
       json = gson.toJson(fina_arr);
     }
-
-    // System.out.println(json);
     return json;
-    // return repo.getSedes();
+  }
+
+  public String getDepartamentos(){
+    String json = "";
+    String sql = "SELECT * FROM ouvxvkkq_conedus_pruebas.departamentos";
+    List<Map<String, Object>> resultados = repo.queryForList(sql);
+    Gson gson = new Gson();
+    if (resultados.size() > 0) {
+      json = gson.toJson(resultados);
+    }
+        return json;
+  }
+
+  public String getMunicipios(){
+    String json = "";
+    String sql = "SELECT * FROM ouvxvkkq_conedus_pruebas.municipios";
+    List<Map<String, Object>> resultados = repo.queryForList(sql);
+    Gson gson = new Gson();
+    if (resultados.size() > 0) {
+      json = gson.toJson(resultados);
+    }
+        return json;
   }
 
   @Override
