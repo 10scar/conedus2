@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
-import { ColegioInfo } from 'src/app/shared/interfaces/Conedus.interfaces';
+import { ColegioInfo, Sede } from 'src/app/shared/interfaces/Conedus.interfaces';
 import { ApiService } from 'src/app/shared/services/api.service';
 
 @Component({
@@ -57,28 +57,76 @@ export class SchoolComponent {
   ){}
 
   ngOnInit(){
-    console.log(this.route);
-    this.getSchool('s');
+    this.getSchool(this.route.snapshot.params['id']);
   }
 
   getSchool(id: string){
-    this.schoolInfo = {
-      establecimientoCorreo: 'alexandravargas@example.org',
-      establecimientoDane: '46289506647',
-      establecimientoDireccion: 'Calle 9ª # 67-7 195064 Jambaló, Cauca',
-      establecimientoGenero: 'MIXTO',
-      establecimientoJornadas: 'Jornada continua',
-      establecimientoNombre: 'Santos Group',
-      establecimientoRector: 'Alex Páez',
-      establecimientoSector: 'NO OFICIAL',
-      establecimientoTelefono: '+57 3023420779',
-      sedeZona: 'RURAL'
-    }
+    this.apiService.get<Sede>(`sede/sede/${id}`).then(
+      (sede) => {
+        console.log(sede);
+        this.schoolInfo = {
+          establecimientoCorreo: sede.sede_email,
+          establecimientoDane: sede.sede_dane,
+          establecimientoDireccion: sede.sede_direccion,
+          establecimientoGenero: 'MIXTO',
+          establecimientoJornadas: 'Jornada continua',
+          establecimientoNombre: sede.sede_nombre,
+          establecimientoRector: 'No definido',
+          establecimientoSector: sede.sede_sector,
+          establecimientoTelefono: sede.sede_telefono,
+          sedeZona: sede.sede_zona,
+          icfes: sede.icfes
+        }
+        const years: string[] = [];
+        const global: number[] = [];
+        const matematicas: number[] = [];
+        const sociales: number[] = [];
+        const lectura: number[] = [];
+        const ciencias:number[] = [];
+        const ingles:number[] = [];
+        this.schoolInfo.icfes?.forEach(i => {
+          years.push(i.year+"")
+          global.push(i.global)
+          matematicas.push(i.matematicas)
+          sociales.push(i.sociales)
+          lectura.push(i.lectura)
+          ciencias.push(i.ciencias)
+          ingles.push(i.ingles)
+        })
+
+        this.setCharts(years, global, matematicas, sociales, lectura, ciencias, ingles);
+      },
+      (err) => {
+        console.error(err);
+      }
+    )
+    // this.schoolInfo = {
+    //   establecimientoCorreo: 'alexandravargas@example.org',
+    //   establecimientoDane: '46289506647',
+    //   establecimientoDireccion: 'Calle 9ª # 67-7 195064 Jambaló, Cauca',
+    //   establecimientoGenero: 'MIXTO',
+    //   establecimientoJornadas: 'Jornada continua',
+    //   establecimientoNombre: 'Santos Group',
+    //   establecimientoRector: 'Alex Páez',
+    //   establecimientoSector: 'NO OFICIAL',
+    //   establecimientoTelefono: '+57 3023420779',
+    //   sedeZona: 'RURAL'
+    // }
+
+    // this.apiService.get<ColegioInfo>(`sede/${id}`).then(schoolInfo => {
+    //   this.loading = false;
+    //   console.log(schoolInfo);
+
+    // })
+  }
+
+
+  setCharts(years: string[], global: number[], matematicas: number[], sociales: number[], lectura: number[], ciencias: number[], ingles: number[]){
     this.lineChartData = {
-      labels: [2020, 2021, 2022],
+      labels: years,
       datasets: [
         {
-          data: [350, 320, 270],
+          data: global,
           label: 'Puntaje Global',
           fill: false,
           tension: 0.8,
@@ -86,7 +134,7 @@ export class SchoolComponent {
           yAxisID: 'y1'
         },
         {
-          data: [90, 56, 77],
+          data: matematicas,
           label: 'Matemáticas',
           fill: false,
           tension: 0.8,
@@ -94,7 +142,7 @@ export class SchoolComponent {
           yAxisID: 'y'
         },
         {
-          data: [45, 53, 75],
+          data: sociales,
           label: 'Sociales',
           fill: false,
           tension: 0.8,
@@ -102,7 +150,7 @@ export class SchoolComponent {
           yAxisID: 'y'
         },
         {
-          data: [90, 67, 70],
+          data: lectura,
           label: 'Lectura',
           fill: false,
           tension: 0.8,
@@ -110,7 +158,7 @@ export class SchoolComponent {
           yAxisID: 'y'
         },
         {
-          data: [30, 45, 63],
+          data: ingles,
           label: 'Inglés',
           fill: false,
           tension: 0.8,
@@ -118,7 +166,7 @@ export class SchoolComponent {
           yAxisID: 'y'
         },
         {
-          data: [94, 56, 58],
+          data: ciencias,
           label: 'Ciencias',
           fill: false,
           tension: 0.8,
@@ -127,13 +175,7 @@ export class SchoolComponent {
         },
       ]
     };
-    // this.apiService.get<ColegioInfo>(`sede/${id}`).then(schoolInfo => {
-    //   this.loading = false;
-    //   console.log(schoolInfo);
-
-    // })
   }
-
 
   getJornadas(){
 

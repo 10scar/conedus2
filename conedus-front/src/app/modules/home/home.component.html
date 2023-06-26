@@ -8,7 +8,7 @@
     <div class="ranking-container">
       <ol class="best-schools-list">
         <li class="best-school" *ngFor="let mejor of mejoresColombia; index as i">
-          <a routerLink="">{{ mejor.establecimiento_nombre }}, en {{ mejor.municipio_nombre | titlecase }} ({{ mejor.promedio | number:'1.0-0' }})</a>
+          <a (click)="goToBestSchool()">{{ mejor.establecimiento_nombre }}, en {{ mejor.municipio_nombre | titlecase }} ({{ mejor.promedio | number:'1.0-0' }})</a>
         </li>
       </ol>
     </div>

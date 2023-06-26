@@ -3,6 +3,7 @@ package com.conedus.backend.services;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -38,6 +39,27 @@ public class SedeService implements ISedeService {
     if (fina_arr.size() > 0) {
       json = gson.toJson(fina_arr);
     }
+    return json;
+  }
+
+  public String getSedeById(String id){
+    List<Map<String, Object>> lista = repo.getSedeById(id);
+    Gson gson = new Gson();
+    ArrayList<Map<String, Object>> icfes = new ArrayList<>();
+    System.out.println(lista.size());
+    for (int i = 0; i < lista.size(); i++) {
+      Map<String, Object> props = new LinkedHashMap<>();
+      props.put("year", lista.get(i).get("icfes_year"));
+      props.put("ciencias", lista.get(i).get("icfes_ciencias"));
+      props.put("matematicas", lista.get(i).get("icfes_matematicas"));
+      props.put("sociales", lista.get(i).get("icfes_sociales"));
+      props.put("lectura", lista.get(i).get("icfes_lectura"));
+      props.put("ingles", lista.get(i).get("icfes_ingles"));
+      props.put("global", lista.get(i).get("icfes_global"));
+      icfes.add(i, props);
+    }
+    lista.get(0).put("icfes", icfes);
+    String json = lista.size() > 0 ? gson.toJson(lista.get(0)) : null;
     return json;
   }
 
@@ -215,7 +237,7 @@ public class SedeService implements ISedeService {
         for (Sede sedes : fina_arr) {
             Random random = new Random();
             Map<String, Object> props = new HashMap<>();
-            props.put("daneSede", sedes.getCodigoDane());
+            props.put("codigoDane", sedes.getCodigoDane());
             props.put("nombre", sedes.getNombre());
             props.put("clasificacion", sedes.getDireccion());
             props.put("puntajeGlobal", (int) sedes.getPromedioIcfes());

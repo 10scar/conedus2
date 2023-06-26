@@ -32,6 +32,12 @@ public class SedeController {
         return service.getSedes();
     }
 
+    @GetMapping("/sede/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public String obtenerSede(@PathVariable String id){
+        return service.getSedeById(id);
+    }
+
     /**
      * Actualiza una sede por su ID
      * 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ColegioPorMunicipio, MejorColegio } from 'src/app/shared/interfaces/Conedus.interfaces';
 import { ApiService } from 'src/app/shared/services/api.service';
 import Swal from 'sweetalert2';
@@ -128,6 +129,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
+    private router: Router,
   ){}
 
   ngOnInit(){
@@ -175,5 +177,9 @@ export class HomeComponent implements OnInit {
         console.log('Hubo un error', err);
         Swal.fire('Error', 'Se presentó un error, contacte al administrador', 'error');
       })
+  }
+
+  goToBestSchool(){
+    this.router.navigate([''])
   }
 }
