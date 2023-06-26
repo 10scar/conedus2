@@ -14,7 +14,7 @@ export interface Usuario {
 })
 export class ApiService {
 
-  private url: string = 'http://localhost:8090';
+  private readonly url: string = 'https://api.conedus.com';
 
   private httpOptions = {
     headers: new HttpHeaders({
