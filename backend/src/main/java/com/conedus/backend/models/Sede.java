@@ -85,6 +85,10 @@ public class Sede implements Comparable<Sede>{
         this.icfes = icfes_new;
         actualizar_promedio();
     }
+
+    public void setPromedioIcfes(Float dato){
+        this.promedio_icfes= dato;
+    }
     
     //Getters
     

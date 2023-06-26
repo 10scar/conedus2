@@ -4,9 +4,11 @@ import com.conedus.backend.models.SedeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -44,9 +46,10 @@ public class SedeController {
         return service.updateSede(request);
     }
 
-    @GetMapping("/filtro")
-    public String filtro() {
-        return service.filtro();
+    @GetMapping("/filtro/{dep}/{municipio}/{sector}/{zona}/{global}")
+    public String filtro( @PathVariable String dep, @PathVariable String municipio, 
+     @PathVariable String sector,  @PathVariable String zona,  @PathVariable String global) {
+        return service.filtro(dep, municipio, sector.toUpperCase(), zona,global );
     }
 
     @GetMapping("/top")
@@ -57,5 +60,14 @@ public class SedeController {
     @GetMapping("/lists")
     public String getLists() {
         return service.getLists();
+    }
+
+    @GetMapping("/departamentos")
+    public String departamento() {
+        return service.getDepartamentos();
+    }
+    @GetMapping("/municipios")
+    public String municipios() {
+        return service.getMunicipios();
     }
 }
