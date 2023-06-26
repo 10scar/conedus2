@@ -126,17 +126,19 @@ export class SchoolComponent {
       return;
     }
 
-    this.schoolInfo.promedio_icfes = this.schoolForm.get('promedio')?.value;
-    this.schoolInfo.nombre = this.schoolForm.get('nombre')?.value;
-    this.schoolInfo.zona = this.schoolForm.get('zona')?.value;
-    this.schoolInfo.direccion = this.schoolForm.get('direccion')?.value;
-    this.schoolInfo.telefono = this.schoolForm.get('telefono')?.value;
-    this.schoolInfo.email = this.schoolForm.get('email')?.value;
-    this.schoolInfo.sector = this.schoolForm.get('sector')?.value;
-    this.schoolInfo.estado = this.schoolForm.get('estado')?.value;
-    this.schoolInfo.modelos = this.schoolForm.get('modelos')?.value;
-    console.log(this.schoolInfo);
-    this.apiService.patch(`sede/${this.schoolInfo.sede_dane}`, this.schoolInfo).then(
+    const schoolDTO = {
+      sedeDane: this.schoolInfo.codigoDane,
+      sedeNombre: this.schoolForm.get('nombre')?.value,
+      sedeZona: this.schoolForm.get('zona')?.value,
+      sedeDireccion: this.schoolForm.get('direccion')?.value,
+      sedeTelefono: this.schoolForm.get('telefono')?.value,
+      sedeEstado: this.schoolForm.get('estado')?.value,
+      sedeSector: this.schoolForm.get('sector')?.value,
+      sedeModelos: this.schoolForm.get('modelos')?.value,
+      sedeEmail: this.schoolForm.get('email')?.value,
+    }
+    console.log(schoolDTO);
+    this.apiService.put(`sede/prueba`, schoolDTO).then(
       (sede) => {
         Swal.fire('Actualizado con éxito');
       },
