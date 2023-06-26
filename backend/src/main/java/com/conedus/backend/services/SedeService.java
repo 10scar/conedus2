@@ -15,6 +15,7 @@ import com.conedus.backend.models.Establecimiento;
 import com.conedus.backend.models.Icfes;
 import com.conedus.backend.models.Sede;
 import com.conedus.backend.repositories.SedeRepository;
+import com.conedus.backend.sede_funtions.FiltradorTabla;
 import com.conedus.backend.interfaces.ISedeService;
 import com.google.gson.Gson;
 
@@ -28,13 +29,13 @@ public class SedeService implements ISedeService {
   public String getSedes() {
 
     String json = "";
-    filtro();
-    /* ArbolAVL<Sede> arbol_sedes = get_data();
+  
+    ArbolAVL<Sede> arbol_sedes = get_data();
     List<Sede> fina_arr = arbol_sedes.getObjectsInArray();
     Gson gson = new Gson();
     if (fina_arr.size() > 0) {
       json = gson.toJson(fina_arr);
-    } */
+    }
 
     // System.out.println(json);
     return json;
@@ -198,19 +199,35 @@ public class SedeService implements ISedeService {
     return json;
   }
   
-  public String filtro(){
+  public String filtro( String departamento,  String municipio, 
+   String sector,  String zona, String global ){
     String json = "";
-    FiltradorTabla tabla = new FiltradorTabla();
+    String sql = "SELECT sed.sede_id, sed.sede_nombre, sed.municipio_id, sed.sede_dane, sed.sede_zona, sed.sede_direccion, sed.sede_telefono, "
+        + "sed.sede_email, sed.sede_sector, sed.sede_estado, sed.sede_modelos, mun.departamento_id, "
+        + "AVG(Cast(ic.icfes_global as int)) as icfes_global, AVG(ic.icfes_matematicas) as icfes_matematicas, "
+        + "AVG(ic.icfes_lectura) as icfes_lectura, AVG(ic.icfes_sociales) as icfes_sociales, "
+        + "AVG(ic.icfes_ciencias) as icfes_ciencias, AVG(ic.icfes_ingles) as icfes_ingles "
+        + "FROM sedes as sed "
+        + "INNER JOIN icfes as ic ON ic.sedes_id = sed.sede_id "
+        + "INNER JOIN municipios as mun ON sed.municipio_id = mun.municipio_id "
+        + "GROUP BY sede_id;";
+    List<Map<String, Object>> resultados = repo.queryForList(sql);
+    FiltradorTabla tabla = new FiltradorTabla(resultados);
     ArrayCircular<String> filtros = new ArrayCircular<>(2);
-    filtros.pushBack("5"); // departamento
-    filtros.pushBack("5"); // municipio
-    filtros.pushBack("OFICIAL"); // SECTOR
-    filtros.pushBack("URBANA"); // ZONA
-    filtros.pushBack("100"); // puntaje global
+    filtros.pushBack(departamento); // departamento
+    filtros.pushBack(municipio); // municipio
+    filtros.pushBack(sector); // SECTOR
+    filtros.pushBack(zona); // ZONA
+    filtros.pushBack(global); // puntaje global
     System.out.println(filtros.stringkey());
 
-    tabla.get_data_filter(filtros).printList();
+    
 
+    List<Sede> datos = tabla.get_data_filter(filtros).arrayList();
+    Gson gson = new Gson();
+    if (datos.size() > 0) {
+      json = gson.toJson(datos);
+    }
     return json;
   }
 }
