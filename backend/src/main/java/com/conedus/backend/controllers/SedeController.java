@@ -63,4 +63,13 @@ public class SedeController {
     public String getLists() {
         return service.getLists();
     }
+
+    @GetMapping("/departamentos")
+    public String departamento() {
+        return service.getDepartamentos();
+    }
+    @GetMapping("/municipios")
+    public String municipios() {
+        return service.getMunicipios();
+    }
 }
