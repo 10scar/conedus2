@@ -3,6 +3,7 @@ package com.conedus.backend.repositories;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.conedus.backend.models.Sede;
@@ -10,7 +11,7 @@ import com.conedus.interfaces.ISedeRepository;
 
 public class SedeRepository implements ISedeRepository {
 
-  private JdbcTemplate jdbcTemplate;
+  @Autowired private JdbcTemplate jdbcTemplate;
 
   @Override
   public List<Sede> getSedes() {

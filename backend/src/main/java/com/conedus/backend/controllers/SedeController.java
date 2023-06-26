@@ -9,7 +9,7 @@ import com.conedus.backend.services.SedeService;
 @RequestMapping("/sede")
 public class SedeController {
 
-    private SedeService service;
+    private SedeService service = new SedeService();
 
     /**
      * Obtiene 100 sedes

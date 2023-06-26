@@ -14,24 +14,26 @@ import com.conedus.backend.models.Establecimiento;
 import com.conedus.backend.models.Icfes;
 import com.conedus.backend.models.Sede;
 import com.conedus.backend.repositories.SedeRepository;
+import com.conedus.backend.sede_funtions.FiltradorTabla;
 import com.conedus.interfaces.ISedeService;
 import com.google.gson.Gson;
 
 public class SedeService implements ISedeService {
 
   @Autowired
-  SedeRepository repo;
+  SedeRepository repo = new SedeRepository();
 
   @Override
   public String getSedes() {
 
     String json = "";
-    ArbolAVL<Sede> arbol_sedes = get_data();
+    filtro();
+    /* ArbolAVL<Sede> arbol_sedes = get_data();
     List<Sede> fina_arr = arbol_sedes.getObjectsInArray();
     Gson gson = new Gson();
     if (fina_arr.size() > 0) {
       json = gson.toJson(fina_arr);
-    }
+    } */
 
     // System.out.println(json);
     return json;
@@ -194,23 +196,19 @@ public class SedeService implements ISedeService {
 
     return json;
   }
-
-  /**
-   * Not currently used
-   * @return
-   */
+  
   public String filtro(){
     String json = "";
-    // FiltradorTabla tabla = new FiltradorTabla(jdbcTemplate);
-    // ArrayCircular<String> filtros = new ArrayCircular<>(2);
-    // filtros.pushBack("5"); // departamento
-    // filtros.pushBack("5"); // municipio
-    // filtros.pushBack("OFICIAL"); // SECTOR
-    // filtros.pushBack("URBANA"); // ZONA
-    // filtros.pushBack("100"); // puntaje global
-    // System.out.println(filtros.stringkey());
+    FiltradorTabla tabla = new FiltradorTabla();
+    ArrayCircular<String> filtros = new ArrayCircular<>(2);
+    filtros.pushBack("5"); // departamento
+    filtros.pushBack("5"); // municipio
+    filtros.pushBack("OFICIAL"); // SECTOR
+    filtros.pushBack("URBANA"); // ZONA
+    filtros.pushBack("100"); // puntaje global
+    System.out.println(filtros.stringkey());
 
-    // tabla.get_data_filter(filtros).printList();
+    tabla.get_data_filter(filtros).printList();
 
     return json;
   }

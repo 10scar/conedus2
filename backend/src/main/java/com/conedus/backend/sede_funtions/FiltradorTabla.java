@@ -16,14 +16,23 @@ public class FiltradorTabla {
     @Autowired
      JdbcTemplate jdbcTemplate;
 
-    public FiltradorTabla(JdbcTemplate jdbc){
+    public FiltradorTabla(){
         hash_colegios = new HashTable<>();
-        jdbcTemplate = jdbc;
     }
 
     public com.conedus.backend.estructuras.LinkedList get_data_filter(ArrayCircular<String> filtros) {
         
-        String sql = "SELECT * FROM ouvxvkkq_conedus_pruebas.sedes limit 200000";
+        String sql = "SELECT sed.sede_id, sed.sede_nombre, sed.municipio_id, sed.sede_dane, sed.sede_zona, sed.sede_direccion, sed.sede_telefono, "
+        + "sed.sede_email, sed.sede_sector, sed.sede_estado, sed.sede_modelos, mun.departamento_id, "
+        + "AVG(ic.icfes_global) as icfes_global, AVG(ic.icfes_matematicas) as icfes_matematicas, "
+        + "AVG(ic.icfes_lectura) as icfes_lectura, AVG(ic.icfes_sociales) as icfes_sociales, "
+        + "AVG(ic.icfes_ciencias) as icfes_ciencias, AVG(ic.icfes_ingles) as icfes_ingles "
+        + "FROM sedes as sed "
+        + "INNER JOIN icfes as ic ON ic.sedes_id = sed.sede_id "
+        + "INNER JOIN municipios as mun ON sed.municipio_id = mun.municipio_id "
+        + "GROUP BY sede_id;";
+
+
         String valorColumna1 = null;
         Sede nueva_sede;
         String municipioID;
@@ -68,8 +77,8 @@ public class FiltradorTabla {
             sector= (String) fila.get("sede_sector");
             estado= (String) fila.get("sede_estado");
             niveles =new String[0];
-            modelos= (String) fila.get("sede_modelos");;
-            grados=new String[0];;
+            modelos= (String) fila.get("sede_modelos");
+            grados=new String[0];
             coordenadas= new ArrayCircular<>(2);
 
             //datos para el filtro
@@ -141,15 +150,16 @@ public class FiltradorTabla {
     }
 
     public static void main(String[] args) {
-       /*  FiltradorTabla tabla = new FiltradorTabla();
-        ArrayCircular<String> filtros = new ArrayCircular<>(2);
-        filtros.pushBack("5"); //departamento
-        filtros.pushBack("5"); //municipio
-        filtros.pushBack("OFICIAL"); //SECTOR
-        filtros.pushBack("URBANA"); //ZONA
-        filtros.pushBack("100"); //puntaje global
+    FiltradorTabla tabla = new FiltradorTabla();
+    ArrayCircular<String> filtros = new ArrayCircular<>(2);
+    filtros.pushBack("5"); // departamento
+    filtros.pushBack("5"); // municipio
+    filtros.pushBack("OFICIAL"); // SECTOR
+    filtros.pushBack("URBANA"); // ZONA
+    filtros.pushBack("100"); // puntaje global
+    System.out.println(filtros.stringkey());
 
-        tabla.get_data_filter(filtros).printList(); */
+    tabla.get_data_filter(filtros).printList();
     }
     
 }
