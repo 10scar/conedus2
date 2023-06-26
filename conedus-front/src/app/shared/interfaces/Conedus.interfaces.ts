@@ -105,7 +105,7 @@ export interface MejorColegio extends ColegioPorMunicipio {
 }
 
 export interface ColegioFiltro {
-  daneSede: number,
+  codigoDane: number,
   nombre: string,
   clasificacion: string,
   puntajeGlobal: number,

@@ -1,6 +1,6 @@
 import { DataSource } from '@angular/cdk/collections';
 import { getLocaleCurrencyCode } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Form, FormControl, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/shared/services/api.service';
@@ -11,6 +11,8 @@ import {
   Municipio,
 } from 'src/app/shared/interfaces/Conedus.interfaces';
 import Swal from 'sweetalert2';
+import { MatPaginator } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lists',
@@ -57,7 +59,13 @@ export class ListsComponent {
   dataSource: MatTableDataSource<ColegioFiltro> =
     new MatTableDataSource<ColegioFiltro>(this.ColegioFiltros);
 
-  constructor(private apiService: ApiService) {}
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+  ) {}
 
   ngOnInit() {
     this.getData();
@@ -69,7 +77,9 @@ export class ListsComponent {
     this.apiService
       .get<ColegioFiltro[]>('sede/lists')
       .then((lista: ColegioFiltro[]) => {
+        console.log(lista);
         this.dataSource = new MatTableDataSource<ColegioFiltro>(lista);
+        this.dataSource.paginator = this.paginator;
       })
       .catch((err) => {
         console.error(err);
@@ -136,10 +146,16 @@ export class ListsComponent {
       (filtrados) => {
         console.log('llega la rta', filtrados);
         this.dataSource = new MatTableDataSource<ColegioFiltro>(filtrados);
+        this.dataSource.paginator = this.paginator;
       },
       (err) => {
         console.error(err);
       }
     );
+  }
+
+  goToSchool(element: ColegioFiltro){
+    console.log(element);
+    this.router.navigate([`establecimiento/${element.codigoDane}`]);
   }
 }
