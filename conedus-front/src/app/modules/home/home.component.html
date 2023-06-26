@@ -1,25 +1,19 @@
 <app-header></app-header>
 <main>
-  <p class="section-title">Rankings de interés</p>
   <section class="ranking-section">
+    <div class="ranking-left">
+      <p class="section-title">Ranking de interés</p>
+      <p class="section-subtitle">Los mejores colegios de Colombia, seleccionados por su desempeño en el examen de la prueba Saber 11.</p>
+    </div>
     <div class="ranking-container">
-      <h2>Mejores 10 colegios de Colombia</h2>
-      <span class="note">Según el puntaje global del ránking ICFES</span>
       <ol class="best-schools-list">
         <li class="best-school" *ngFor="let mejor of mejoresColombia; index as i">
-          <a routerLink="">{{ mejor.establecimiento_nombre }}, en {{ mejor.municipio_nombre | titlecase }}</a>
+          <a routerLink="">{{ mejor.establecimiento_nombre }}, en {{ mejor.municipio_nombre | titlecase }} ({{ mejor.promedio | number:'1.0-0' }})</a>
         </li>
       </ol>
     </div>
-    <div class="ranking-container">
-      <h2>Mejores 10 colegios de Colombia</h2>
-      <span>Necesitamos acceso a tu ubicación para esta funcionalidad</span>
-      <ng-container *ngIf="!accesoUbicacion">
-        <button></button>
-      </ng-container>
-    </div>
   </section>
-  <p class="section-title">Mejores colegios por ciudad</p>
+  <p class="section-title center">Mejores colegios por ciudad</p>
   <section class="cities-ranking">
     <div *ngFor="let colegio of colegiosCiudad" class="cities-school">
       <img class="cities-school__info-img" [src]="'../../../assets/images/cities/'+colegio.municipio_nombre+'.jpg'"

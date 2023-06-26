@@ -3,26 +3,37 @@ main {
   margin: 0 auto;
 }
 
+.ranking-left {
+  width: 30%;
+}
+
 .section-title {
   padding-top: 30px;
   padding-bottom: 30px;
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 500;
   color: var(--dark-blue);
-  text-align: center;
+  text-align: right;
+}
+
+.section-subtitle {
+  font-size: 20px;
+  text-align: right;
 }
 
 .ranking-section {
   display: flex;
-  justify-content: space-between;
-  margin: 0 auto 30px;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  margin: 30px auto;
 }
 
 .ranking-container {
   text-align: center;
   padding: 20px;
-  background-color: var(--light-orange);
-  width: 440px;
+  background-color: transparent;
+  width: 460px;
   border-radius: 10px;
 }
 
@@ -37,7 +48,7 @@ main {
 
 .best-school {
   text-align: left;
-  font-size: 18px;
+  font-size: 20px;
   margin-bottom: 20px;
 }
 
@@ -116,4 +127,8 @@ main {
 
 .cities-school__info-text {
   font-size: 16px;
+}
+
+.center {
+  text-align: center;
 }

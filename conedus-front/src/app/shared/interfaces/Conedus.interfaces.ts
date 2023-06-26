@@ -100,7 +100,8 @@ export interface ColegioPorMunicipio {
 }
 
 export interface MejorColegio extends ColegioPorMunicipio {
-  id: number
+  id: number,
+  promedio: number
 }
 
 export interface ColegioFiltro {

@@ -15,14 +15,16 @@ export class HomeComponent implements OnInit {
       establecimiento_nombre: 'Colegio Bilingüe Diana Oese',
       establecimiento_sector: 'NO OFICIAL',
       municipio_nombre: 'CALI',
-      id: 1
+      id: 1,
+      promedio: 420
     },
     {
       establecimiento_genero: 'MIXTO',
       establecimiento_nombre: 'Colegio Nuevo Cambridge',
       establecimiento_sector: 'NO OFICIAL',
       municipio_nombre: 'Floridablanca',
-      id: 2
+      id: 2,
+      promedio: 412
     },
     {
       establecimiento_genero: 'MIXTO',
@@ -30,6 +32,7 @@ export class HomeComponent implements OnInit {
       establecimiento_sector: 'NO OFICIAL',
       municipio_nombre: 'Bogotá',
       id: 3,
+      promedio: 410
     },
     {
       establecimiento_genero: 'MIXTO',
@@ -37,6 +40,7 @@ export class HomeComponent implements OnInit {
       establecimiento_sector: 'NO OFICIAL',
       municipio_nombre: 'Floridablanca',
       id: 4,
+      promedio: 405
     },
     {
       establecimiento_genero: 'MIXTO',
@@ -44,34 +48,40 @@ export class HomeComponent implements OnInit {
       establecimiento_sector: 'NO OFICIAL',
       municipio_nombre: 'Pamplona',
       id: 5,
+      promedio: 397
     },
     {
       establecimiento_genero: 'MIXTO',
       establecimiento_nombre: 'Colegio Gimnasio Calibío',
       establecimiento_sector: 'NO OFICIAL',
       municipio_nombre: 'Popayán',
-      id: 6
+      id: 6,
+      promedio: 390
     },
     {
       establecimiento_genero: 'MIXTO',
       establecimiento_nombre: 'Colegio Anglo Americano',
       establecimiento_sector: 'NO OFICIAL',
       municipio_nombre: 'Bogotá',
-      id: 7
+      id: 7,
+      promedio: 380
     },
     {
       establecimiento_genero: 'MIXTO',
       establecimiento_nombre: 'Gimnasio Colombo Británico',
       establecimiento_sector: 'NO OFICIAL',
       municipio_nombre: 'Bogotá',
-      id: 8
+      id: 8,
+      promedio: 360
+
     },
     {
       establecimiento_genero: 'MIXTO',
       establecimiento_nombre: 'Colegio Colombo Americano CAS',
       establecimiento_sector: 'NO OFICIAL',
       municipio_nombre: 'Bogotá',
-      id: 9
+      id: 9,
+      promedio: 355
     },
   ];
 
@@ -122,7 +132,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(){
     this.getBestSchools();
-    this.requestLocation();
+    // this.requestLocation();
   }
 
   async requestLocation(){
